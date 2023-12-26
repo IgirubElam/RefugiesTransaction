@@ -1,13 +1,15 @@
 package com.refugietransaction.model;
 
-import java.math.BigDecimal;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,24 +26,25 @@ public class Menage {
 	@GeneratedValue
 	
 	@Column(name = "id_menage")
-	private int id_menage;
+	private int idMenage;
 	
 	@Column(name = "id_number")
-	private int id_number;
+	private int idNumber;
 	
 	@Column(name = "personne_contact")
-	private String personne_contact;
+	private String personneContact;
 	
 	@Column(name = "num_telephone")
-	private String num_telephone;
+	private String numTelephone;
 	
 	@Column(name = "langue_parlee")
-	private String langue_parlee;
+	private String langueParlee;
 	
-	@Column(name = "solde")
-	private BigDecimal solde;
 	
 	@ManyToOne
 	@JoinColumn(name = "camp_id")
 	private Camp camp;
+	
+	@OneToMany(mappedBy = "menage", cascade = CascadeType.ALL)
+	private List<MouvementStock> mouvementStocks;
 }

@@ -1,9 +1,13 @@
 package com.refugietransaction.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +23,11 @@ public class Produit {
 	@GeneratedValue
 	
 	@Column(name = "id_produit")
-	private int id_produit;
+	private int idProduit;
 	
 	@Column(name = "nom_produit")
-	private String nom_produit;
+	private String nomProduit;
+	
+	@OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+	private List<MouvementStock> mouvementStocks;
 }
