@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Menage extends AbstractEntity {
 	
 	@Column(name = "id_number")
-	private int idNumber;
+	private Long idNumber;
 	
 	@Column(name = "personne_contact")
 	private String personneContact;
