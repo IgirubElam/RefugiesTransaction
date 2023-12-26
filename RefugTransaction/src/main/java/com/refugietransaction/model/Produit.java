@@ -13,15 +13,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "CAMP_TBL")
-public class Camp {
-	
+@Table(name = "produit")
+public class Produit {
 	@Id
 	@GeneratedValue
 	
-	@Column(name = "id_camp")
-	private int id_camp;
+	@Column(name = "id_produit")
+	private int id_produit;
 	
-	@Column(name = "nom_camp")
-	private String nom_camp;
+	@Column(name = "nom_produit")
+	private String nom_produit;
 }
