@@ -2,13 +2,10 @@ package com.refugietransaction.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -22,13 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "menage")
-public class Menage {
-	
-	@Id
-	@GeneratedValue
-	
-	@Column(name = "id_menage")
-	private int idMenage;
+public class Menage extends AbstractEntity {
 	
 	@Column(name = "id_number")
 	private int idNumber;
@@ -48,6 +39,6 @@ public class Menage {
 	@JoinColumn(name = "camp_id")
 	private Camp camp;
 	
-	@OneToMany(mappedBy = "menage", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "menage")
 	private List<MouvementStock> mouvementStocks;
 }

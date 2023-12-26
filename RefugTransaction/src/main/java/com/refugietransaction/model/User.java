@@ -2,13 +2,10 @@ package com.refugietransaction.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,12 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
-public class User {
-	
-	@Id
-	@GeneratedValue
-	@Column(name = "id_user")
-	private int idUser;
+public class User extends AbstractEntity {
 	
 	@Column(name = "user_name")
 	private String userName;
@@ -43,6 +35,12 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private TypeUser typeUser;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user")
 	private List<MouvementStock> mouvementStocks;
+	
+	@OneToMany(mappedBy = "userId")
+	private List<Administrator> administrators;
+	
+	@OneToMany(mappedBy = "userI")
+	private List<Agent> agents;
 }
