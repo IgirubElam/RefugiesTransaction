@@ -1,7 +1,7 @@
 package com.refugietransaction.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.Instant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ public class MouvementStock extends AbstractEntity {
 	
 	@Column(name = "date_mouvement")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateMouvement;
+	private Instant dateMouvement;
 	
 	@Column(name = "quantite")
 	private BigDecimal quantite;
