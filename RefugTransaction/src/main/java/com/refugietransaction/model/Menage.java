@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -38,7 +40,8 @@ public class Menage {
 	private String numTelephone;
 	
 	@Column(name = "langue_parlee")
-	private String langueParlee;
+	@Enumerated(EnumType.STRING)
+	private TypeLangue langueParlee;
 	
 	
 	@ManyToOne
