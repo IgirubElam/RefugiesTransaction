@@ -28,6 +28,6 @@ public class Produit {
 	@Column(name = "nom_produit")
 	private String nomProduit;
 	
-	@OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "idArticle", cascade = CascadeType.ALL)
 	private List<MouvementStock> mouvementStocks;
 }
