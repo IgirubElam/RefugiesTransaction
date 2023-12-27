@@ -14,7 +14,9 @@ public class MouvementStockValidator {
 		if(mouvementStockDto.getQuantite() == null) {
 			errors.add("Veillez renseigner la quantite");
 		}
-		
+		if(mouvementStockDto.getTypeMouvement() == null) {
+			errors.add("Veillez renseigner la quantite");
+		}
 		return errors;
 	}
 }
