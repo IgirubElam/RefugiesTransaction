@@ -19,7 +19,7 @@ public class MenageValidator {
 			errors.add("Veillez renseigner la personne de contact");
 		}
 		
-		if(menageDto == null || !StringUtils.hasLength(menageDto.getIdNumber().toString())) {
+		if(menageDto.getIdNumber() == null) {
 			errors.add("Veillez renseigner le numero");
 		}
 		

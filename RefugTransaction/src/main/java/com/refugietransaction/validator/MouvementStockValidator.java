@@ -2,19 +2,16 @@ package com.refugietransaction.validator;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.util.StringUtils;
-
 import com.refugietransaction.dto.MouvementStockDto;
 
 public class MouvementStockValidator {
 	public static List<String> validate(MouvementStockDto mouvementStockDto){
 		List<String> errors = new ArrayList<>();
 		
-		if(mouvementStockDto == null || !StringUtils.hasLength(mouvementStockDto.getDateMouvement().toString())) {
-			errors.add("Veillez renseigner la quantite");
+		if(mouvementStockDto.getDateMouvement() == null) {
+			errors.add("Veillez renseigner la date mouvement");
 		}
-		if(mouvementStockDto == null || !StringUtils.hasLength(mouvementStockDto.getQuantite().toString())) {
+		if(mouvementStockDto.getQuantite() == null) {
 			errors.add("Veillez renseigner la quantite");
 		}
 		
