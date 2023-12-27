@@ -23,6 +23,10 @@ public class MenageValidator {
 			errors.add("Veillez renseigner le numero");
 		}
 		
+		if(menageDto.getLangueParlee() == null) {
+			errors.add("Veillez choisir la langue parlee");
+		}
+		
 		return errors;
 	}
 }

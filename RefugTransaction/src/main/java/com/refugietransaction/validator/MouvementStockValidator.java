@@ -15,7 +15,13 @@ public class MouvementStockValidator {
 			errors.add("Veillez renseigner la quantite");
 		}
 		if(mouvementStockDto.getTypeMouvement() == null) {
-			errors.add("Veillez renseigner la quantite");
+			errors.add("Veillez choir le type mouvement");
+		}
+		if(mouvementStockDto.getIdArticle() == null) {
+			errors.add("Veillez choisir le produit");
+		}
+		if(mouvementStockDto.getMenage() == null) {
+			errors.add("Veillez choisir le menage");
 		}
 		return errors;
 	}
