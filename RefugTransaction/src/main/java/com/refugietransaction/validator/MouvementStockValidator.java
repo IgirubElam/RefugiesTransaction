@@ -21,7 +21,7 @@ public class MouvementStockValidator {
 			errors.add("Veillez choisir le produit");
 		}
 		if(mouvementStockDto.getMenage() == null) {
-			errors.add("Veillez choisir le menage");
+			errors.add("Veillez choisir une menage");
 		}
 		return errors;
 	}
