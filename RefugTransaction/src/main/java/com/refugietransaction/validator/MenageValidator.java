@@ -23,14 +23,6 @@ public class MenageValidator {
 			errors.add("Veillez renseigner le numero");
 		}
 		
-		if(menageDto == null || !StringUtils.hasLength(menageDto.getLangueParlee().toString())) {
-			errors.add("Veillez renseigner la langue parlee");
-		}
-		
-		if(menageDto == null || !StringUtils.hasLength(menageDto.getCamp().toString())) {
-			errors.add("Veillez choisir le camp");
-		}
-		
 		return errors;
 	}
 }
