@@ -10,6 +10,6 @@ import com.refugietransaction.model.MouvementStock;
 
 public interface MouvementStockRepository extends JpaRepository<MouvementStock, Long> {
 	
-	@Query("select sum(m.quantite) from mouvement_stock m where m.produit.id = :idArticle")
+	@Query("select sum(m.quantite) from mouvement_stock m where m.produit.id = :idArticle and m.menage.id = :idMenage")
 	BigDecimal stockReelMenage(@Param("idProduit") Long idProduit, @Param("idMenage") Long idMenage);
 }
