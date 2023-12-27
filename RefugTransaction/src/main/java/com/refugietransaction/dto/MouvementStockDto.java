@@ -3,6 +3,7 @@ package com.refugietransaction.dto;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+import com.refugietransaction.model.Agent;
 import com.refugietransaction.model.Menage;
 import com.refugietransaction.model.MouvementStock;
 import com.refugietransaction.model.Produit;
@@ -22,7 +23,7 @@ public class MouvementStockDto {
 	private TypeMouvementStock typeMouvement;
 	private Menage menage;
 	private Produit idArticle;
-	private User user;
+	private Agent agentId;
 	private Instant creationDate;
 	private Instant lastModifiedDate;
 	
@@ -39,7 +40,7 @@ public class MouvementStockDto {
 				.typeMouvement(mouvementStock.getTypeMouvement())
 				.menage(mouvementStock.getMenage())
 				.idArticle(mouvementStock.getIdArticle())
-				.user(mouvementStock.getUser())
+				.agentId(mouvementStock.getAgentId())
 				.creationDate(mouvementStock.getCreationDate())
 				.lastModifiedDate(mouvementStock.getLastModifiedDate())
 				.build();
@@ -58,7 +59,7 @@ public class MouvementStockDto {
 		mouvementStock.setTypeMouvement(mouvementStockDto.getTypeMouvement());
 		mouvementStock.setMenage(mouvementStockDto.getMenage());
 		mouvementStock.setIdArticle(mouvementStockDto.getIdArticle());
-		mouvementStock.setUser(mouvementStockDto.getUser());
+		mouvementStock.setAgentId(mouvementStockDto.getAgentId());
 		mouvementStock.setCreationDate(mouvementStockDto.getCreationDate());
 		mouvementStock.setLastModifiedDate(mouvementStockDto.getLastModifiedDate());
 		

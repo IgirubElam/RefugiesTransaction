@@ -35,9 +35,6 @@ public class User extends AbstractEntity {
 	@Enumerated(EnumType.STRING)
 	private TypeUser typeUser;
 	
-	@OneToMany(mappedBy = "user")
-	private List<MouvementStock> mouvementStocks;
-	
 	@OneToMany(mappedBy = "userId")
 	private List<Administrator> administrators;
 	
