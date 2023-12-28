@@ -25,14 +25,12 @@ public class UserDto {
 	private Instant creationDate;
 	private Instant lastModifiedDate;
 	
-	@JsonIgnore
-	private List<MouvementStockDto> mouvementStocks;
 	
 	@JsonIgnore
-	private List<Administrator> administrators;
+	private List<AdministratorDto> administrators;
 	
 	@JsonIgnore
-	private List<Agent> agents;
+	private List<AgentDto> agents;
 	
 	public static UserDto fromEntity(User user) {
 		if(user == null) {

@@ -11,20 +11,14 @@ public class UserValidator {
 	public static List<String> validate(UserDto userDto){
 		List<String> errors = new ArrayList<>();
 		
-		if(userDto == null || !StringUtils.hasLength(userDto.getUserName())) {
+		if(userDto == null) {
 			errors.add("Veuillez renseigner le username");
-		}
-		if(userDto == null || !StringUtils.hasLength(userDto.getPhoneNumber())) {
 			errors.add("Veuillez renseigner le numero de telephone");
-		}
-		if(userDto == null || !StringUtils.hasLength(userDto.getEmail())) {
 			errors.add("Veuillez renseigner l'email");
-		}
-		if(userDto == null || !StringUtils.hasLength(userDto.getPassword())) {
 			errors.add("Veuillez renseigner le password");
 		}
 		if(userDto.getTypeUser() == null) {
-			errors.add("Veuillez renseigner le username");
+			errors.add("Veuillez selectionner le type user");
 		}
 		return errors;
 	}
