@@ -15,4 +15,6 @@ public interface AdministratorService {
 	void update(Long id);
 	
 	void delete(Long id);
+	
+	List<AdministratorDto> findAllByUserId(Long id);
 }

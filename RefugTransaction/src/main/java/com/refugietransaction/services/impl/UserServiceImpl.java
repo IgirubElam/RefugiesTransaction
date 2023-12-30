@@ -7,19 +7,16 @@ import org.aspectj.weaver.loadtime.Agent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.refugietransaction.dto.ProduitDto;
 import com.refugietransaction.dto.UserDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
 import com.refugietransaction.exceptions.InvalidEntityException;
 import com.refugietransaction.exceptions.InvalidOperationException;
 import com.refugietransaction.model.Administrator;
-import com.refugietransaction.model.MouvementStock;
 import com.refugietransaction.repository.AdministratorRepository;
 import com.refugietransaction.repository.AgentRepository;
 import com.refugietransaction.repository.UserRepository;
 import com.refugietransaction.services.UserService;
-import com.refugietransaction.validator.ProduitValidator;
 import com.refugietransaction.validator.UserValidator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -83,8 +80,8 @@ public class UserServiceImpl implements UserService {
 			log.error("User ID is null");
 			return;
 		}
-		List<Administrator> administrators = administratorRepository.findAllByUserId(id);
-		List<Agent> agents = agentRepository.findAllByUserId(id);
+		List<Administrator> administrators = administratorRepository.findAllById(id);
+		List<Agent> agents = agentRepository.findAllById(id);
 		if(!administrators.isEmpty() || !agents.isEmpty()) {
 			throw new InvalidOperationException("Impossible de supprimer cet utilisateur qui est deja utilisé",
 					ErrorCodes.UTILISATEUR_ALREADY_EXISTS);

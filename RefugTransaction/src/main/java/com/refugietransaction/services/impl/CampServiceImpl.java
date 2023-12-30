@@ -86,8 +86,8 @@ public class CampServiceImpl implements CampService {
 			log.error("Camp ID is null");
 			return;
 		}
-		List<Menage> menages = menageRepository.findAllByCampId(id);
-		List<Agent> agents = agentRepository.findAllByCampId(id);
+		List<Menage> menages = menageRepository.findAllById(id);
+		List<Agent> agents = agentRepository.findAllById(id);
 		if(!menages.isEmpty() || !agents.isEmpty()) {
 			throw new InvalidOperationException("Impossible de supprimer ce camp qui est deja utilise",
 					ErrorCodes.CAMP_ALREADY_IN_USE);

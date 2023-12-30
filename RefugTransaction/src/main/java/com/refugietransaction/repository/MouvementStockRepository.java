@@ -1,6 +1,7 @@
 package com.refugietransaction.repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,4 +13,6 @@ public interface MouvementStockRepository extends JpaRepository<MouvementStock, 
 	
 	@Query("select sum(m.quantite) from  MouvementStock m where m.idArticle.id = :idProduit and m.menage.id = :idMenage")
 	BigDecimal stockReelMenage(@Param("idProduit") Long idProduit, @Param("idMenage") Long idMenage);
+
+	List<MouvementStock> findAllById(Long id);
 }
