@@ -1,5 +1,6 @@
 package com.refugietransaction.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.refugietransaction.dto.MouvementStockDto;
@@ -16,5 +17,5 @@ public interface MouvementStockService {
 	
 	void update(Long id, MouvementStockDto updatedDto);
 	
-	void stockReelMenage(Long idProduit, Long IdMenage);
+	BigDecimal stockReelMenage(Long idProduit, Long idMenage);
 }

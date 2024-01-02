@@ -1,5 +1,6 @@
 package com.refugietransaction.services.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -106,8 +107,8 @@ public class MouvementStockServiceImpl implements MouvementStockService {
 	}
 
 	@Override
-	public void stockReelMenage(Long idProduit, Long IdMenage) {
-		// TODO Auto-generated method stub
+	public BigDecimal stockReelMenage(Long idProduit, Long idMenage) {
+		return mouvementStockRepository.stockReelMenage(idProduit, idMenage);
 		
 	}
 
