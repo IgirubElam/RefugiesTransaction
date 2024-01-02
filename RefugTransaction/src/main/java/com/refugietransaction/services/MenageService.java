@@ -8,7 +8,7 @@ public interface MenageService {
 	
 	MenageDto save(MenageDto dto);
 	
-	void update(Long id);
+	void update(Long id, MenageDto updatedDto);
 	
 	MenageDto findById(Long id);
 	

@@ -90,8 +90,32 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(Long id) {
-		// TODO Auto-generated method stub
+	public void update(Long id, UserDto updatedDto) {
+		if (id == null) {
+	        log.error("User ID is null");
+	        return;
+	    }
+
+	    UserDto existingUserDto = findById(id);
+
+	    if (existingUserDto == null) {
+	        throw new EntityNotFoundException("User not found with ID: " + id, ErrorCodes.UTILISATEUR_NOT_FOUND);
+	    }
+
+	    List<String> errors = UserValidator.validate(updatedDto);
+	    if (!errors.isEmpty()) {
+	        log.error("Updated user is not valid {}", updatedDto);
+	        throw new InvalidEntityException("Un utilisateur mis à jour n'est pas valide", ErrorCodes.UTILISATEUR_NOT_VALID, errors);
+	    }
+
+	    existingUserDto.setUserName(updatedDto.getUserName());
+	    existingUserDto.setPhoneNumber(updatedDto.getPhoneNumber());
+	    existingUserDto.setEmail(updatedDto.getEmail());
+	    existingUserDto.setPassword(updatedDto.getPassword());
+	    existingUserDto.setTypeUser(updatedDto.getTypeUser());
+	    
+
+	    userRepository.save(UserDto.toEntity(existingUserDto));
 		
 	}
 

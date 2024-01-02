@@ -7,6 +7,7 @@ import org.aspectj.weaver.loadtime.Agent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.refugietransaction.dto.AgentDto;
 import com.refugietransaction.dto.CampDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
@@ -17,6 +18,7 @@ import com.refugietransaction.repository.AgentRepository;
 import com.refugietransaction.repository.CampRepository;
 import com.refugietransaction.repository.MenageRepository;
 import com.refugietransaction.services.CampService;
+import com.refugietransaction.validator.AgentValidator;
 import com.refugietransaction.validator.CampValidator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -51,8 +53,28 @@ public class CampServiceImpl implements CampService {
 	}
 
 	@Override
-	public void update(Long id) {
-		// TODO Auto-generated method stub
+	public void update(Long id, CampDto updatedDto) {
+		if (id == null) {
+	        log.error("Camp ID is null");
+	        return;
+	    }
+
+	    CampDto existingCampDto = findById(id);
+
+	    if (existingCampDto == null) {
+	        throw new EntityNotFoundException("Camp not found with ID: " + id, ErrorCodes.CAMP_NOT_FOUND);
+	    }
+
+	    List<String> errors = CampValidator.validate(updatedDto);
+	    if (!errors.isEmpty()) {
+	        log.error("Updated camp is not valid {}", updatedDto);
+	        throw new InvalidEntityException("Le camp mis à jour n'est pas valide", ErrorCodes.CAMP_NOT_VALID, errors);
+	    }
+
+	    existingCampDto.setNomCamp(updatedDto.getNomCamp());
+	    
+
+	    campRepository.save(CampDto.toEntity(existingCampDto));
 		
 	}
 

@@ -14,7 +14,7 @@ public interface AgentService {
 	
 	List<AgentDto> findAllByUserId(Long id);
 	
-	void update(Long id);
+	void update(Long id, AgentDto updatedDto);
 	
 	void delete(Long id);
 }

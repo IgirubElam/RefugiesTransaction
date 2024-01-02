@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.refugietransaction.dto.CampDto;
 import com.refugietransaction.dto.MenageDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
@@ -13,6 +14,7 @@ import com.refugietransaction.exceptions.InvalidEntityException;
 import com.refugietransaction.repository.MenageRepository;
 import com.refugietransaction.repository.MouvementStockRepository;
 import com.refugietransaction.services.MenageService;
+import com.refugietransaction.validator.CampValidator;
 import com.refugietransaction.validator.MenageValidator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,8 +47,30 @@ public class MenageServiceImpl implements MenageService {
 	}
 
 	@Override
-	public void update(Long id) {
-		// TODO Auto-generated method stub
+	public void update(Long id, MenageDto updatedDto) {
+		if (id == null) {
+	        log.error("Menage ID is null");
+	        return;
+	    }
+
+	    MenageDto existingMenageDto = findById(id);
+
+	    if (existingMenageDto == null) {
+	        throw new EntityNotFoundException("Menage not found with ID: " + id, ErrorCodes.MENAGE_NOT_FOUND);
+	    }
+
+	    List<String> errors = MenageValidator.validate(updatedDto);
+	    if (!errors.isEmpty()) {
+	        log.error("Updated menage is not valid {}", updatedDto);
+	        throw new InvalidEntityException("Une menage mis à jour n'est pas valide", ErrorCodes.MENAGE_NOT_VALID, errors);
+	    }
+
+	    existingMenageDto.setPersonneContact(updatedDto.getPersonneContact());
+	    existingMenageDto.setNumTelephone(updatedDto.getNumTelephone());
+	    existingMenageDto.setLangueParlee(updatedDto.getLangueParlee());
+	    
+
+	    menageRepository.save(MenageDto.toEntity(existingMenageDto));
 		
 	}
 

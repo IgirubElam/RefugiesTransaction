@@ -12,8 +12,8 @@ public class MenageValidator {
 		List<String> errors = new ArrayList<>();
 		
 		if (menageDto == null) {
-		    errors.add("Veuillez renseigner le numero du menage");
 		    errors.add("Veuillez renseigner la personne de contact");
+		    errors.add("Veuillez renseigner le numero de telephone");
 		    return errors;
 		}
 		

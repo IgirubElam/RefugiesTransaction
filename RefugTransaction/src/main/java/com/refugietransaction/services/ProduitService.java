@@ -8,7 +8,7 @@ public interface ProduitService {
 	
 	ProduitDto save(ProduitDto dto);
 	
-	void update(Long id);
+	void update(Long id, ProduitDto updatedDto);
 	
 	ProduitDto findById(Long id);
 	

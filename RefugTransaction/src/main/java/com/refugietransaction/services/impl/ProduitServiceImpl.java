@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.refugietransaction.dto.MenageDto;
+import com.refugietransaction.dto.MouvementStockDto;
 import com.refugietransaction.dto.ProduitDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
@@ -19,6 +20,7 @@ import com.refugietransaction.repository.MouvementStockRepository;
 import com.refugietransaction.repository.ProduitRepository;
 import com.refugietransaction.services.ProduitService;
 import com.refugietransaction.validator.MenageValidator;
+import com.refugietransaction.validator.MouvementStockValidator;
 import com.refugietransaction.validator.ProduitValidator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -50,8 +52,28 @@ public class ProduitServiceImpl implements ProduitService {
 	}
 
 	@Override
-	public void update(Long id) {
-		// TODO Auto-generated method stub
+	public void update(Long id, ProduitDto updatedDto) {
+		if (id == null) {
+	        log.error("Produit ID is null");
+	        return;
+	    }
+
+	    ProduitDto existingProduitDto = findById(id);
+
+	    if (existingProduitDto == null) {
+	        throw new EntityNotFoundException("Produit not found with ID: " + id, ErrorCodes.PRODUCT_NOT_FOUND);
+	    }
+
+	    List<String> errors = ProduitValidator.validate(updatedDto);
+	    if (!errors.isEmpty()) {
+	        log.error("Updated produit is not valid {}", updatedDto);
+	        throw new InvalidEntityException("Un produit mis à jour n'est pas valide", ErrorCodes.PRODUCT_NOT_VALID, errors);
+	    }
+
+	    existingProduitDto.setNomProduit(updatedDto.getNomProduit());
+	    
+
+	    produitRepository.save(ProduitDto.toEntity(existingProduitDto));
 		
 	}
 

@@ -14,7 +14,7 @@ public interface MouvementStockService {
 	
 	void delete(Long id);
 	
-	void update(Long id);
+	void update(Long id, MouvementStockDto updatedDto);
 	
 	void stockReelMenage(Long idProduit, Long IdMenage);
 }

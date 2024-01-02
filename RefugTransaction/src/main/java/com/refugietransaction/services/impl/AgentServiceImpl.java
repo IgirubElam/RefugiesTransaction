@@ -66,9 +66,28 @@ public class AgentServiceImpl implements AgentService {
 	}
 
 	@Override
-	public void update(Long id) {
-		// TODO Auto-generated method stub
-		
+	public void update(Long id, AgentDto updatedDto) {
+		if (id == null) {
+	        log.error("Agent ID is null");
+	        return;
+	    }
+
+	    AgentDto existingAgentDto = findById(id);
+
+	    if (existingAgentDto == null) {
+	        throw new EntityNotFoundException("Agent not found with ID: " + id, ErrorCodes.AGENT_NOT_FOUND);
+	    }
+
+	    List<String> errors = AgentValidator.validate(updatedDto);
+	    if (!errors.isEmpty()) {
+	        log.error("Updated agent is not valid {}", updatedDto);
+	        throw new InvalidEntityException("L'agent mis à jour n'est pas valide", ErrorCodes.AGENT_NOT_VALID, errors);
+	    }
+
+	    existingAgentDto.setCampId(updatedDto.getCampId());
+	    
+
+	    agentRepository.save(AgentDto.toEntity(existingAgentDto));
 	}
 
 	@Override
@@ -91,6 +110,5 @@ public class AgentServiceImpl implements AgentService {
 		return null;
 	}
 		
-	}
 
 }
