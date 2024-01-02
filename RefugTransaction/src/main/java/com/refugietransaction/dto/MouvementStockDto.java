@@ -7,7 +7,7 @@ import com.refugietransaction.model.Agent;
 import com.refugietransaction.model.Menage;
 import com.refugietransaction.model.MouvementStock;
 import com.refugietransaction.model.Produit;
-import com.refugietransaction.model.TypeMouvementStock;
+import com.refugietransaction.model.TypeMouvementStock; 
 
 import lombok.Builder;
 import lombok.Data;

@@ -15,4 +15,9 @@ public interface MouvementStockRepository extends JpaRepository<MouvementStock, 
 	BigDecimal stockReelMenage(@Param("idProduit") Long idProduit, @Param("idMenage") Long idMenage);
 
 	List<MouvementStock> findAllById(Long id);
+
+	static List<MouvementStock> findAllByAgentId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
