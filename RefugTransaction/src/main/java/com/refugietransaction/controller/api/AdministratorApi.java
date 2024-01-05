@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.refugietransaction.dto.AdministratorDto;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+@Api("administrators")
 public interface AdministratorApi {
 	
 	String APP_ROOT = "/api";

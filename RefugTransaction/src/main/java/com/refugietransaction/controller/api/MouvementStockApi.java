@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 import com.refugietransaction.dto.MouvementStockDto;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
+@Api("mouvementStocks")
 
 public interface MouvementStockApi {
 	

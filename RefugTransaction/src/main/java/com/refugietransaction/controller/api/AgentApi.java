@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.*;
 
 import com.refugietransaction.dto.AgentDto;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import com.refugietransaction.utils.Contants.APP_ROOT;
+
+@Api("agents")
 
 public interface AgentApi {
-	
-    String APP_ROOT = "/api";
 
     @ApiOperation("Créer un agent")
     @ApiResponses(value = {
