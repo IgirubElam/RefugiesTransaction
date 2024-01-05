@@ -10,4 +10,6 @@ public interface AdministratorRepository extends JpaRepository<Administrator, Lo
 
 	List<Administrator> findAllById(Long id);
 
+	
+
 }

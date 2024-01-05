@@ -53,32 +53,6 @@ public class CampServiceImpl implements CampService {
 	}
 
 	@Override
-	public void update(Long id, CampDto updatedDto) {
-		if (id == null) {
-	        log.error("Camp ID is null");
-	        return;
-	    }
-
-	    CampDto existingCampDto = findById(id);
-
-	    if (existingCampDto == null) {
-	        throw new EntityNotFoundException("Camp not found with ID: " + id, ErrorCodes.CAMP_NOT_FOUND);
-	    }
-
-	    List<String> errors = CampValidator.validate(updatedDto);
-	    if (!errors.isEmpty()) {
-	        log.error("Updated camp is not valid {}", updatedDto);
-	        throw new InvalidEntityException("Le camp mis à jour n'est pas valide", ErrorCodes.CAMP_NOT_VALID, errors);
-	    }
-
-	    existingCampDto.setNomCamp(updatedDto.getNomCamp());
-	    
-
-	    campRepository.save(CampDto.toEntity(existingCampDto));
-		
-	}
-
-	@Override
 	public CampDto findById(Long id) {
 		// TODO Auto-generated method stub
 		if(id == null) {
@@ -109,11 +83,17 @@ public class CampServiceImpl implements CampService {
 			return;
 		}
 		List<Menage> menages = menageRepository.findAllById(id);
-		List<Agent> agents = agentRepository.findAllById(id);
-		if(!menages.isEmpty() || !agents.isEmpty()) {
-			throw new InvalidOperationException("Impossible de supprimer ce camp qui est deja utilise",
+		List<com.refugietransaction.model.Agent> agents = agentRepository.findAllById(id);
+		if(!menages.isEmpty()) {
+			throw new InvalidOperationException("Impossible de supprimer un camp ayant au moins une menage",
 					ErrorCodes.CAMP_ALREADY_IN_USE);
 		}
+		
+		if(!agents.isEmpty()) {
+			throw new InvalidOperationException("Impossible de supprimer un camp ayant au moins un affectation agent",
+					ErrorCodes.CAMP_ALREADY_IN_USE);
+		}
+		campRepository.deleteById(id);
 		
 	}
 	

@@ -21,8 +21,8 @@ public class MouvementStockDto {
 	private BigDecimal quantite;
 	private TypeMouvementStock typeMouvement;
 	private Menage menage;
-	private Produit idArticle;
-	private Agent agentId;
+	private Produit produit;
+	private Agent agent;
 	private Instant creationDate;
 	private Instant lastModifiedDate;
 	
@@ -38,8 +38,8 @@ public class MouvementStockDto {
 				.quantite(mouvementStock.getQuantite())
 				.typeMouvement(mouvementStock.getTypeMouvement())
 				.menage(mouvementStock.getMenage())
-				.idArticle(mouvementStock.getIdArticle())
-				.agentId(mouvementStock.getAgentId())
+				.produit(mouvementStock.getProduit())
+				.agent(mouvementStock.getAgent())
 				.creationDate(mouvementStock.getCreationDate())
 				.lastModifiedDate(mouvementStock.getLastModifiedDate())
 				.build();
@@ -57,8 +57,8 @@ public class MouvementStockDto {
 		mouvementStock.setQuantite(mouvementStockDto.getQuantite());
 		mouvementStock.setTypeMouvement(mouvementStockDto.getTypeMouvement());
 		mouvementStock.setMenage(mouvementStockDto.getMenage());
-		mouvementStock.setIdArticle(mouvementStockDto.getIdArticle());
-		mouvementStock.setAgentId(mouvementStockDto.getAgentId());
+		mouvementStock.setProduit(mouvementStockDto.getProduit());
+		mouvementStock.setAgent(mouvementStockDto.getAgent());
 		mouvementStock.setCreationDate(mouvementStockDto.getCreationDate());
 		mouvementStock.setLastModifiedDate(mouvementStockDto.getLastModifiedDate());
 		

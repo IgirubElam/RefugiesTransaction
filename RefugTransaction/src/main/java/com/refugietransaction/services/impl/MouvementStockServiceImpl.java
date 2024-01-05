@@ -7,14 +7,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.refugietransaction.dto.MenageDto;
 import com.refugietransaction.dto.MouvementStockDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
 import com.refugietransaction.exceptions.InvalidEntityException;
 import com.refugietransaction.repository.MouvementStockRepository;
 import com.refugietransaction.services.MouvementStockService;
-import com.refugietransaction.validator.MenageValidator;
 import com.refugietransaction.validator.MouvementStockValidator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -98,7 +96,7 @@ public class MouvementStockServiceImpl implements MouvementStockService {
 	    existingMvtStockDto.setDateMouvement(updatedDto.getDateMouvement());
 	    existingMvtStockDto.setQuantite(updatedDto.getQuantite());
 	    existingMvtStockDto.setTypeMouvement(updatedDto.getTypeMouvement());
-	    existingMvtStockDto.setIdArticle(updatedDto.getIdArticle());
+	    existingMvtStockDto.setProduit(updatedDto.getProduit());
 	    existingMvtStockDto.setMenage(updatedDto.getMenage());
 	    
 

@@ -1,6 +1,7 @@
 package com.refugietransaction.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.aspectj.weaver.loadtime.Agent;
@@ -52,32 +53,6 @@ public class ProduitServiceImpl implements ProduitService {
 	}
 
 	@Override
-	public void update(Long id, ProduitDto updatedDto) {
-		if (id == null) {
-	        log.error("Produit ID is null");
-	        return;
-	    }
-
-	    ProduitDto existingProduitDto = findById(id);
-
-	    if (existingProduitDto == null) {
-	        throw new EntityNotFoundException("Produit not found with ID: " + id, ErrorCodes.PRODUCT_NOT_FOUND);
-	    }
-
-	    List<String> errors = ProduitValidator.validate(updatedDto);
-	    if (!errors.isEmpty()) {
-	        log.error("Updated produit is not valid {}", updatedDto);
-	        throw new InvalidEntityException("Un produit mis à jour n'est pas valide", ErrorCodes.PRODUCT_NOT_VALID, errors);
-	    }
-
-	    existingProduitDto.setNomProduit(updatedDto.getNomProduit());
-	    
-
-	    produitRepository.save(ProduitDto.toEntity(existingProduitDto));
-		
-	}
-
-	@Override
 	public ProduitDto findById(Long id) {
 		
 		if (id == null) {
@@ -112,7 +87,7 @@ public class ProduitServiceImpl implements ProduitService {
 			throw new InvalidOperationException("Impossible de supprimer ce produit qui est deja utilisé",
 					ErrorCodes.PRODUCT_ALREADY_IN_USE);
 		}
-		
+		produitRepository.deleteById(id);
 	}
 
 }

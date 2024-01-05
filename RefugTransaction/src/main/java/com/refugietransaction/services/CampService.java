@@ -8,8 +8,6 @@ public interface CampService {
 	
 	CampDto save(CampDto dto);
 	
-	void update(Long id, CampDto updatedDto);
-	
 	CampDto findById(Long id);
 	
 	List<CampDto> findAll();

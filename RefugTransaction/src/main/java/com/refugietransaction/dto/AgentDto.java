@@ -16,8 +16,8 @@ import lombok.Data;
 public class AgentDto {
 	
 	private Long id;
-	private User userI;
-	private Camp campId;
+	private User user;
+	private Camp camp;
 	private Instant creationDate;
 	private Instant lastModifiedDate;
 	
@@ -32,8 +32,8 @@ public class AgentDto {
 		
 		return AgentDto.builder()
 				.id(agent.getId())
-				.userI(agent.getUserI())
-				.campId(agent.getCampId())
+				.user(agent.getUser())
+				.camp(agent.getCamp())
 				.creationDate(agent.getCreationDate())
 				.lastModifiedDate(agent.getLastModifiedDate())
 				.build();
@@ -47,8 +47,8 @@ public class AgentDto {
 		
 		Agent agent = new Agent();
 		agent.setId(agentDto.getId());
-		agent.setUserI(agentDto.getUserI());
-		agent.setCampId(agentDto.getCampId());
+		agent.setUser(agentDto.getUser());
+		agent.setCamp(agentDto.getCamp());
 		agent.setCreationDate(agentDto.getCreationDate());
 		agent.setLastModifiedDate(agentDto.getLastModifiedDate());
 		

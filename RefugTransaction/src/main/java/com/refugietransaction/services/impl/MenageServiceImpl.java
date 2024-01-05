@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.refugietransaction.dto.CampDto;
 import com.refugietransaction.dto.MenageDto;
+import com.refugietransaction.dto.MouvementStockDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
 import com.refugietransaction.exceptions.InvalidEntityException;
@@ -47,34 +48,6 @@ public class MenageServiceImpl implements MenageService {
 	}
 
 	@Override
-	public void update(Long id, MenageDto updatedDto) {
-		if (id == null) {
-	        log.error("Menage ID is null");
-	        return;
-	    }
-
-	    MenageDto existingMenageDto = findById(id);
-
-	    if (existingMenageDto == null) {
-	        throw new EntityNotFoundException("Menage not found with ID: " + id, ErrorCodes.MENAGE_NOT_FOUND);
-	    }
-
-	    List<String> errors = MenageValidator.validate(updatedDto);
-	    if (!errors.isEmpty()) {
-	        log.error("Updated menage is not valid {}", updatedDto);
-	        throw new InvalidEntityException("Une menage mis à jour n'est pas valide", ErrorCodes.MENAGE_NOT_VALID, errors);
-	    }
-
-	    existingMenageDto.setPersonneContact(updatedDto.getPersonneContact());
-	    existingMenageDto.setNumTelephone(updatedDto.getNumTelephone());
-	    existingMenageDto.setLangueParlee(updatedDto.getLangueParlee());
-	    
-
-	    menageRepository.save(MenageDto.toEntity(existingMenageDto));
-		
-	}
-
-	@Override
 	public MenageDto findById(Long id) {
 		
 		 if (id == null) {
@@ -94,6 +67,15 @@ public class MenageServiceImpl implements MenageService {
 		
 		return menageRepository.findAll().stream()
 				.map(MenageDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+
+	@Override
+	public List<MouvementStockDto> findHistoriqueMouvementStock(Long idProduit, Long idMenage) {
+		
+		return mouvementStockRepository.findMvtStkByArticleIdAndMenageId(idProduit, idMenage).stream()
+				.map(MouvementStockDto::fromEntity)
 				.collect(Collectors.toList());
 	}
 	

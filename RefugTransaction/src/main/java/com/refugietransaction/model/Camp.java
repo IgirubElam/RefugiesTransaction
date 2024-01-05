@@ -23,6 +23,6 @@ public class Camp extends AbstractEntity {
 	@OneToMany(mappedBy = "camp")
 	private List<Menage> menages;
 	
-	@OneToMany(mappedBy = "campId")
+	@OneToMany(mappedBy = "camp")
 	private List<Agent> agents;
 }

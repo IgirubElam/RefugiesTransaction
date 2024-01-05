@@ -84,7 +84,7 @@ public class AgentServiceImpl implements AgentService {
 	        throw new InvalidEntityException("L'agent mis à jour n'est pas valide", ErrorCodes.AGENT_NOT_VALID, errors);
 	    }
 
-	    existingAgentDto.setCampId(updatedDto.getCampId());
+	    existingAgentDto.setCamp(updatedDto.getCamp());
 	    
 
 	    agentRepository.save(AgentDto.toEntity(existingAgentDto));
@@ -96,7 +96,7 @@ public class AgentServiceImpl implements AgentService {
 		      log.error("Agent ID is null");
 		      return;
 		    }
-		    List<MouvementStock> mouvementStocks = MouvementStockRepository.findAllByAgentId(id);
+		    List<MouvementStock> mouvementStocks = mouvementStockRepository.findAllById(id);
 		    if (!mouvementStocks.isEmpty()) {
 		      throw new InvalidOperationException("Impossible de supprimer cet agent qui est deja utilise",
 		          ErrorCodes.AGENT_ALREADY_EXISTS);

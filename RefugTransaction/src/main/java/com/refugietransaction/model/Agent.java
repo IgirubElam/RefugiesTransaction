@@ -20,12 +20,12 @@ public class Agent extends AbstractEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User userI;
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "camp_id")
-	private Camp campId;
+	private Camp camp;
 	
-	@OneToMany(mappedBy = "agentId")
+	@OneToMany(mappedBy = "agent")
 	private List<MouvementStock> mouvementStocks;
 }

@@ -34,6 +34,9 @@ public class Menage extends AbstractEntity {
 	@Enumerated(EnumType.STRING)
 	private TypeLangue langueParlee;
 	
+	@Column(name = "nombre_personne")
+	private Integer nombrePersonnes;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "camp_id")

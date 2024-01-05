@@ -8,9 +8,9 @@ import com.refugietransaction.dto.AgentDto;
 public class AgentValidator {
 	
 	public static List<String> validate(AgentDto agentDto){
-		List<String> errors = new ArrayList();
+		List<String> errors = new ArrayList<>();
 		
-		if(agentDto.getCampId() == null || agentDto.getCampId().getId() == null) {
+		if(agentDto.getCamp() == null || agentDto.getCamp().getId() == null) {
 			errors.add("Veillez selectionner le camp");
 		}
 		

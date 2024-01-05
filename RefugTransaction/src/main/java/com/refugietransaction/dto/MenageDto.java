@@ -20,6 +20,7 @@ public class MenageDto {
 	private String personneContact;
 	private String numTelephone;
 	private TypeLangue langueParlee;
+	private Integer nombrePersonnes; 
 	private Camp camp;
 	private Instant creationDate;
 	private Instant lastModifiedDate;
@@ -39,6 +40,7 @@ public class MenageDto {
 				.personneContact(menage.getPersonneContact())
 				.numTelephone(menage.getNumTelephone())
 				.langueParlee(menage.getLangueParlee())
+				.nombrePersonnes(menage.getNombrePersonnes())
 				.camp(menage.getCamp())
 				.creationDate(menage.getCreationDate())
 				.lastModifiedDate(menage.getLastModifiedDate())
@@ -57,6 +59,7 @@ public class MenageDto {
 		menage.setPersonneContact(menageDto.getPersonneContact());
 		menage.setNumTelephone(menageDto.getNumTelephone());
 		menage.setLangueParlee(menageDto.getLangueParlee());
+		menage.setNombrePersonnes(menageDto.getNombrePersonnes());
 		menage.setCamp(menageDto.getCamp());
 		menage.setCreationDate(menageDto.getCreationDate());
 		menage.setLastModifiedDate(menageDto.getLastModifiedDate());

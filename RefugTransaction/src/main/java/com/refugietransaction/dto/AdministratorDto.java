@@ -13,7 +13,7 @@ import lombok.Data;
 public class AdministratorDto {
 	
 	private Long id;
-	private User userId;
+	private User user;
 	private Instant creationDate;
 	private Instant lastModifiedDate;
 	
@@ -25,7 +25,7 @@ public class AdministratorDto {
 		
 		return AdministratorDto.builder()
 				.id(administrator.getId())
-				.userId(administrator.getUserId())
+				.user(administrator.getUser())
 				.creationDate(administrator.getCreationDate())
 				.lastModifiedDate(administrator.getLastModifiedDate())
 				.build();
@@ -39,7 +39,7 @@ public class AdministratorDto {
 		
 		Administrator administrator = new Administrator();
 		administrator.setId(administratorDto.getId());
-		administrator.setUserId(administratorDto.getUserId());
+		administrator.setUser(administratorDto.getUser());
 		administrator.setCreationDate(administratorDto.getCreationDate());
 		administrator.setLastModifiedDate(administratorDto.getLastModifiedDate());
 		

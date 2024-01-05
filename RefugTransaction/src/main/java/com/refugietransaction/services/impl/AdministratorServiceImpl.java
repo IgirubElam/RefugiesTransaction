@@ -46,6 +46,12 @@ public class AdministratorServiceImpl implements AdministratorService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<AdministratorDto> findAllByUserId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

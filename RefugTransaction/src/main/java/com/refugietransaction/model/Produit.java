@@ -20,6 +20,6 @@ public class Produit extends AbstractEntity {
 	@Column(name = "nom_produit")
 	private String nomProduit;
 	
-	@OneToMany(mappedBy = "idArticle")
+	@OneToMany(mappedBy = "produit")
 	private List<MouvementStock> mouvementStocks;
 }
