@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Api("camps")
+
 public interface CampApi {
 
     String APP_ROOT = "/api";
