@@ -3,10 +3,13 @@ package com.refugietransaction.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.refugietransaction.controller.api.ProduitApi;
 import com.refugietransaction.dto.ProduitDto;
 import com.refugietransaction.services.ProduitService;
+
+@RestController
 
 public class ProduitController implements ProduitApi {
 	
