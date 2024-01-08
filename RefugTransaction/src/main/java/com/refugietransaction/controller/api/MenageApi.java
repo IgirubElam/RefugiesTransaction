@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import com.refugietransaction.dto.AgentDto;
 import com.refugietransaction.dto.MenageDto;
 import com.refugietransaction.dto.MouvementStockDto;
 import com.refugietransaction.utils.Constants;
@@ -18,7 +19,7 @@ import io.swagger.annotations.ApiResponses;
 
 public interface MenageApi {
 
-    @ApiOperation("Créer un ménage")
+    @ApiOperation(value = "Créer un ménage", notes = "Cette methode permet d'enregistrer ou modifier un menage", response = MenageDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet ménage cree / modifie"),
             @ApiResponse(code = 400, message = "L'objet ménage n'est pas valide")
@@ -26,7 +27,7 @@ public interface MenageApi {
     @PostMapping(value = Constants.APP_ROOT + "/menages/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     MenageDto save(@RequestBody MenageDto dto);
 
-    @ApiOperation("Trouver un ménage par son ID")
+    @ApiOperation(value = "Trouver un ménage par son ID", notes = "Cette methode permet de chercher un menage par son ID", response = MenageDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le ménage a ete trouve dans la BDD"),
             @ApiResponse(code = 404, message = "Aucun ménage n'existe dans la BDD avec l'ID fourni")
@@ -34,14 +35,16 @@ public interface MenageApi {
     @GetMapping(value = Constants.APP_ROOT + "/menages/{idMenage}", produces = MediaType.APPLICATION_JSON_VALUE)
     MenageDto findById(@PathVariable("idMenage") Long idMenage);
 
-    @ApiOperation("Récupérer la liste de tous les ménages")
+    @ApiOperation(value = "Récupérer la liste de tous les ménages", notes = "Cette methode permet de chercher et renvoyer la liste des menages qui existent" + "dans la BDD",
+    		responseContainer = "List<MenageDto>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des ménages / Une liste vide")
     })
     @GetMapping(value = Constants.APP_ROOT + "/menages/all", produces = MediaType.APPLICATION_JSON_VALUE)
     List<MenageDto> findAll();
 
-    @ApiOperation("Trouver l'historique des mouvements de stock d'un produit dans un ménage")
+    @ApiOperation(value = "Trouver l'historique des mouvements de stock d'un produit dans un ménage", notes = "Cette methode permet de trouver l'historique des mouvements de stock d'un produit dans un ménage",
+    		responseContainer = "List<MouvementStockDto>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'historique des mouvements de stock a ete trouve"),
             @ApiResponse(code = 404, message = "Aucun ménage ou produit correspondant n'a ete trouve dans la BDD")
