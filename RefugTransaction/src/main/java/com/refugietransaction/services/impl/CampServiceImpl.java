@@ -1,5 +1,6 @@
 package com.refugietransaction.services.impl;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ public class CampServiceImpl implements CampService {
 			log.error("Agent is not valid {}", dto);
 			throw new InvalidEntityException("Le camp n'est pas valide", ErrorCodes.CAMP_NOT_VALID, errors);
 		}
+		//dto.setCreationDate(Instant.now());
 		return CampDto.fromEntity(
 				campRepository.save(CampDto.toEntity(dto))
 		);
