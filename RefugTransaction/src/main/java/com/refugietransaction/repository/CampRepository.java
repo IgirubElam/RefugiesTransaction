@@ -11,6 +11,6 @@ import com.refugietransaction.model.Camp;
 public interface CampRepository extends JpaRepository<Camp, Long> {
 	
 	// JPQL query
-	  @Query(value = "select c from Camp c where c.nom_camp = :nom_camp")
-	  Optional<Camp> findCampByName(@Param("nom_camp") String nom_camp);
+	  @Query(value = "select c from Camp c where c.nomCamp = :nomCamp")
+	  Optional<Camp> findCampByName(@Param("nomCamp") String nomCamp);
 }

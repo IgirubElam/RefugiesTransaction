@@ -18,6 +18,6 @@ public interface MouvementStockRepository extends JpaRepository<MouvementStock, 
 	@Query("select m from  MouvementStock m where m.produit.id = :idProduit and m.menage.id = :idMenage")
 	List<MouvementStock> findAllByArticleIdAndMenageId(@Param("idProduit") Long idProduit, @Param("idMenage") Long idMenage);
 	
-	//List<MouvementStock> findAllByArticleIdMenageId(Long id);
+	List<MouvementStock> findAllById(Long id);
 	
 }

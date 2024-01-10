@@ -13,7 +13,7 @@ public interface MenageRepository extends JpaRepository<Menage, Long> {
 
 	List<Menage> findAllById(Long id);
 	// JPQL query
-	@Query(value = "select m from Menage m where m.id_number = :id_number")
-	Optional<Menage> findMenageByIdNumber(@Param("id_number") Long id_number);
+	@Query(value = "select m from Menage m where m.idNumber = :idNumber")
+	Optional<Menage> findMenageByIdNumber(@Param("idNumber") Long idNumber);
 
 }

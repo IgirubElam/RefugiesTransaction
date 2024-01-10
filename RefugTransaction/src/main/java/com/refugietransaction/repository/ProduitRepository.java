@@ -11,6 +11,6 @@ import com.refugietransaction.model.Produit;
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
 	
 	// JPQL query
-	  @Query(value = "select p from Produit p where p.nom_produit = :nom_produit")
-	  Optional<Produit> findProduitByNom(@Param("nom_produit") String nom_produit);
+	  @Query(value = "select p from Produit p where p.nomProduit = :nomProduit")
+	  Optional<Produit> findProduitByNom(@Param("nomProduit") String nomProduit);
 }

@@ -88,7 +88,7 @@ public class MenageServiceImpl implements MenageService {
 	@Override
 	public List<MouvementStockDto> findHistoriqueMouvementStock(Long idProduit, Long idMenage) {
 		
-		return mouvementStockRepository.findMvtStkByArticleIdAndMenageId(idProduit, idMenage).stream()
+		return mouvementStockRepository.findAllByArticleIdAndMenageId(idProduit, idMenage).stream()
 				.map(MouvementStockDto::fromEntity)
 				.collect(Collectors.toList());
 	}
