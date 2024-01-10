@@ -22,35 +22,23 @@ public class MouvementStockController implements MouvementStockApi {
 	}
 
 	@Override
-	public MouvementStockDto save(MouvementStockDto dto) {
-		return mouvementStockService.save(dto);
-	}
-
-	@Override
-	public MouvementStockDto findById(Long idMvtStock) {
-		return mouvementStockService.findById(idMvtStock);
-	}
-
-	@Override
-	public List<MouvementStockDto> findAll() {
-		return mouvementStockService.findAll();
-	}
-
-	@Override
-	public void delete(Long idMvtStock) {
-		mouvementStockService.delete(idMvtStock);
-		
-	}
-
-	@Override
-	public void update(Long idMvtStock, MouvementStockDto updatedDto) {
-		mouvementStockService.update(idMvtStock, updatedDto);
-		
-	}
-
-	@Override
 	public BigDecimal stockReelMenage(Long idProduit, Long idMenage) {
 		return mouvementStockService.stockReelMenage(idProduit, idMenage);
+	}
+
+	@Override
+	public List<MouvementStockDto> mvtStkArticleMenage(Long idProduit, Long idMenage) {
+		return mouvementStockService.mvtStkArticleMenage(idProduit, idMenage);
+	}
+
+	@Override
+	public MouvementStockDto entreeStock(MouvementStockDto dto) {
+		return mouvementStockService.entreeStock(dto);
+	}
+
+	@Override
+	public MouvementStockDto sortieStock(MouvementStockDto dto) {
+		return mouvementStockService.sortieStock(dto);
 	}
 
 }

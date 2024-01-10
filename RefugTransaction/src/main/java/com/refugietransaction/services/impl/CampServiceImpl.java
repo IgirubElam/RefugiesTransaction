@@ -1,7 +1,9 @@
 package com.refugietransaction.services.impl;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.aspectj.weaver.loadtime.Agent;
@@ -14,6 +16,7 @@ import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
 import com.refugietransaction.exceptions.InvalidEntityException;
 import com.refugietransaction.exceptions.InvalidOperationException;
+import com.refugietransaction.model.Camp;
 import com.refugietransaction.model.Menage;
 import com.refugietransaction.repository.AgentRepository;
 import com.refugietransaction.repository.CampRepository;
@@ -48,10 +51,20 @@ public class CampServiceImpl implements CampService {
 			log.error("Agent is not valid {}", dto);
 			throw new InvalidEntityException("Le camp n'est pas valide", ErrorCodes.CAMP_NOT_VALID, errors);
 		}
-		//dto.setCreationDate(Instant.now());
+		
+		if(campAlreadyExists(dto.getNomCamp())) {
+		      throw new InvalidEntityException("Un autre camp avec le meme nom existe deja", ErrorCodes.CAMP_ALREADY_EXISTS,
+		          Collections.singletonList("Un autre camp avec le meme nom existe deja dans la BDD"));
+		    }
+		
 		return CampDto.fromEntity(
 				campRepository.save(CampDto.toEntity(dto))
 		);
+	}
+	
+	private boolean campAlreadyExists(String nom_camp) {
+	    Optional<Camp> camp = campRepository.findCampByName(nom_camp);
+	    return camp.isPresent();
 	}
 
 	@Override

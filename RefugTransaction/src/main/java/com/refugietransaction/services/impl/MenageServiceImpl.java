@@ -1,6 +1,8 @@
 package com.refugietransaction.services.impl;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import com.refugietransaction.dto.MouvementStockDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
 import com.refugietransaction.exceptions.InvalidEntityException;
+import com.refugietransaction.model.Menage;
 import com.refugietransaction.repository.MenageRepository;
 import com.refugietransaction.repository.MouvementStockRepository;
 import com.refugietransaction.services.MenageService;
@@ -42,9 +45,20 @@ public class MenageServiceImpl implements MenageService {
 	      log.error("Mouvement Stock is not valid {}", dto);
 	      throw new InvalidEntityException("La menage n'est pas valide", ErrorCodes.MENAGE_NOT_VALID, errors);
 	    }
+	    
+	    if(menageAlreadyExists(dto.getIdNumber())) {
+	    	throw new InvalidEntityException("Un autre menage avec le meme numero existe deja", ErrorCodes.MENAGE_ALREADY_EXISTS,
+	    			Collections.singletonList("Un autre menage avec le meme numero existe deja dans la BDD"));
+	    }
+	    
 		return MenageDto.fromEntity(
 				menageRepository.save(MenageDto.toEntity(dto))
 		);
+	}
+	
+	private boolean menageAlreadyExists(Long id_number) {
+		Optional<Menage> menage = menageRepository.findMenageByIdNumber(id_number);
+		return menage.isPresent();
 	}
 
 	@Override

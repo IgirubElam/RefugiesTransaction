@@ -11,6 +11,7 @@ import com.refugietransaction.dto.MouvementStockDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
 import com.refugietransaction.exceptions.InvalidEntityException;
+import com.refugietransaction.model.TypeMouvementStock;
 import com.refugietransaction.repository.MouvementStockRepository;
 import com.refugietransaction.services.MouvementStockService;
 import com.refugietransaction.validator.MouvementStockValidator;
@@ -27,87 +28,78 @@ public class MouvementStockServiceImpl implements MouvementStockService {
 	public MouvementStockServiceImpl(MouvementStockRepository mouvementStockRepository) {
 		this.mouvementStockRepository = mouvementStockRepository;
 	}
-	
+
 	@Override
-	public MouvementStockDto save(MouvementStockDto dto) {
+	public BigDecimal stockReelMenage(Long idProduit, Long idMenage) {
 		
-		List<String> errors = MouvementStockValidator.validate(dto);
-	    if (!errors.isEmpty()) {
-	    	
-	      throw new InvalidEntityException("Le mouvement stock n'est pas valide", ErrorCodes.MVT_STK_NOT_VALID, errors);
-	    }
-		return MouvementStockDto.fromEntity(
-				mouvementStockRepository.save(MouvementStockDto.toEntity(dto))
-		);
+		if(idProduit == null) {
+			log.warn("ID produit is NULL");
+			return BigDecimal.valueOf(-1);
+		}
+		
+		if(idMenage == null) {
+			log.warn("ID menage is NULL");
+			return BigDecimal.valueOf(-1);
+		}
+		
+		return mouvementStockRepository.stockReelMenage(idProduit, idMenage);
 	}
 
 	@Override
-	public MouvementStockDto findById(Long id) {
+	public List<MouvementStockDto> mvtStkArticleMenage(Long idProduit, Long idMenage) {
 		
-		if (id == null) {
-		      log.error("Mouvement stock ID is null");
-		      return null;
-		    }
-		return mouvementStockRepository.findById(id)
-				.map(MouvementStockDto::fromEntity)
-				.orElseThrow(()->new EntityNotFoundException(
-						"Aucun mouvement stock avec l'ID = " +id+ " n' a ete trouve dans la BDD",
-						ErrorCodes.MVT_STK_NOT_FOUND)
-						);
-	}
-
-	@Override
-	public List<MouvementStockDto> findAll() {
-		
-		return mouvementStockRepository.findAll().stream()
+		return mouvementStockRepository.findAllByArticleIdAndMenageId(idProduit, idMenage).stream()
 				.map(MouvementStockDto::fromEntity)
 				.collect(Collectors.toList());
 	}
 
 	@Override
-	public void delete(Long id) {
+	public MouvementStockDto entreeStock(MouvementStockDto dto) {
+		return entreePositive(dto, TypeMouvementStock.ENTREE);
+	}
+
+	@Override
+	public MouvementStockDto sortieStock(MouvementStockDto dto) {
+		return sortiePositive(dto, TypeMouvementStock.SORTIE);
+	}
+	
+	private MouvementStockDto entreePositive(MouvementStockDto dto, TypeMouvementStock typeMouvement) {
 		
-		if(id == null) {
-			log.error("Mouvement Stock ID is null");
-			return;
+		List<String> errors = MouvementStockValidator.validate(dto);
+		if(!errors.isEmpty()) {
+			log.error("Article is not valid {}", dto);
+			throw new InvalidEntityException("Le mouvement de stock n'est pas valide", ErrorCodes.MVT_STK_NOT_VALID, errors);
 		}
+		dto.setQuantite(
+				BigDecimal.valueOf(
+						Math.abs(dto.getQuantite().doubleValue())
+						)
+				);
+		dto.setTypeMouvement(typeMouvement);
 		
+		return MouvementStockDto.fromEntity(
+				mouvementStockRepository.save(MouvementStockDto.toEntity(dto))
+		);
 	}
-
-	@Override
-	public void update(Long id, MouvementStockDto updatedDto) {
-		if (id == null) {
-	        log.error("Mouvement stock ID is null");
-	        return;
-	    }
-
-	    MouvementStockDto existingMvtStockDto = findById(id);
-
-	    if (existingMvtStockDto == null) {
-	        throw new EntityNotFoundException("Mouvement stock not found with ID: " + id, ErrorCodes.MVT_STK_NOT_FOUND);
-	    }
-
-	    List<String> errors = MouvementStockValidator.validate(updatedDto);
-	    if (!errors.isEmpty()) {
-	        log.error("Updated mouvement stock is not valid {}", updatedDto);
-	        throw new InvalidEntityException("Une menage mis à jour n'est pas valide", ErrorCodes.MVT_STK_NOT_VALID, errors);
-	    }
-
-	    existingMvtStockDto.setDateMouvement(updatedDto.getDateMouvement());
-	    existingMvtStockDto.setQuantite(updatedDto.getQuantite());
-	    existingMvtStockDto.setTypeMouvement(updatedDto.getTypeMouvement());
-	    existingMvtStockDto.setProduit(updatedDto.getProduit());
-	    existingMvtStockDto.setMenage(updatedDto.getMenage());
-	    
-
-	    mouvementStockRepository.save(MouvementStockDto.toEntity(existingMvtStockDto));
+	
+	private MouvementStockDto sortiePositive(MouvementStockDto dto, TypeMouvementStock typeMouvement) {
 		
-	}
-
-	@Override
-	public BigDecimal stockReelMenage(Long idProduit, Long idMenage) {
-		return mouvementStockRepository.stockReelMenage(idProduit, idMenage);
+		List<String> errors = MouvementStockValidator.validate(dto);
+		if(!errors.isEmpty()) {
+			log.error("Article is not valid {}", dto);
+			throw new InvalidEntityException("Le mouvement du stock n'est pas valide", ErrorCodes.MVT_STK_NOT_VALID, errors);
+		}
+		dto.setQuantite(
+				BigDecimal.valueOf(
+						Math.abs(dto.getQuantite().doubleValue())
+						)
+				);
+		dto.setTypeMouvement(typeMouvement);
 		
+		return MouvementStockDto.fromEntity(
+				mouvementStockRepository.save(MouvementStockDto.toEntity(dto))
+		);
 	}
+	
 
 }

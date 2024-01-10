@@ -20,7 +20,9 @@ public class MenageDto {
 	private String personneContact;
 	private String numTelephone;
 	private TypeLangue langueParlee;
-	private Integer nombrePersonnes; 
+	private Integer nombrePersonnes;
+	
+	@JsonIgnore
 	private Camp camp;
 	private Instant creationDate;
 	private Instant lastModifiedDate;

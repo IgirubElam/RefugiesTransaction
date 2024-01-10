@@ -1,5 +1,6 @@
 package com.refugietransaction.services.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ import com.refugietransaction.exceptions.InvalidEntityException;
 import com.refugietransaction.exceptions.InvalidOperationException;
 import com.refugietransaction.model.Menage;
 import com.refugietransaction.model.MouvementStock;
+import com.refugietransaction.model.Produit;
 import com.refugietransaction.repository.MouvementStockRepository;
 import com.refugietransaction.repository.ProduitRepository;
 import com.refugietransaction.services.ProduitService;
@@ -47,9 +49,20 @@ public class ProduitServiceImpl implements ProduitService {
 	      log.error("Mouvement Stock is not valid {}", dto);
 	      throw new InvalidEntityException("Le produit n'est pas valide", ErrorCodes.PRODUCT_NOT_VALID, errors);
 	    }
+	    
+	    if(produitAlreadyExists(dto.getNomProduit())) {
+	    	throw new InvalidEntityException("Un autre produit avec le meme nom existe deja", ErrorCodes.PRODUCT_ALREADY_EXISTS,
+	    			Collections.singletonList("Un autre produit avec le meme nom existe deja dans la BDD"));
+	    }
+	    
 		return ProduitDto.fromEntity(
 				produitRepository.save(ProduitDto.toEntity(dto))
 		);
+	}
+	
+	private boolean produitAlreadyExists(String nom_produit) {
+		Optional<Produit> produit = produitRepository.findProduitByNom(nom_produit);
+		return produit.isPresent();
 	}
 
 	@Override

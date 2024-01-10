@@ -7,15 +7,11 @@ import com.refugietransaction.dto.MouvementStockDto;
 
 public interface MouvementStockService {
 	
-	MouvementStockDto save(MouvementStockDto dto);
-	
-	MouvementStockDto findById(Long id);
-	
-	List<MouvementStockDto> findAll();
-	
-	void delete(Long id);
-	
-	void update(Long id, MouvementStockDto updatedDto);
-	
 	BigDecimal stockReelMenage(Long idProduit, Long idMenage);
+
+	List<MouvementStockDto> mvtStkArticleMenage(Long idProduit, Long idMenage);
+
+	MouvementStockDto entreeStock(MouvementStockDto dto);
+
+	MouvementStockDto sortieStock(MouvementStockDto dto); 
 }

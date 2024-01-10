@@ -15,9 +15,9 @@ public interface MouvementStockRepository extends JpaRepository<MouvementStock, 
 	@Query("select sum(m.quantite) from  MouvementStock m where m.produit.id = :idProduit and m.menage.id = :idMenage")
 	BigDecimal stockReelMenage(@Param("idProduit") Long idProduit, @Param("idMenage") Long idMenage);
 	
-	@Query("select '*' from  MouvementStock m where m.produit.id = :idProduit and m.menage.id = :idMenage")
-	List<MouvementStock> findMvtStkByArticleIdAndMenageId(@Param("idProduit") Long idProduit, @Param("idMenage") Long idMenage);
+	@Query("select m from  MouvementStock m where m.produit.id = :idProduit and m.menage.id = :idMenage")
+	List<MouvementStock> findAllByArticleIdAndMenageId(@Param("idProduit") Long idProduit, @Param("idMenage") Long idMenage);
 	
-	List<MouvementStock> findAllById(Long id);
+	//List<MouvementStock> findAllByArticleIdMenageId(Long id);
 	
 }
