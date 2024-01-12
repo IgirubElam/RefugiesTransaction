@@ -3,6 +3,8 @@ package com.refugietransaction.model;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -37,6 +39,7 @@ public class MouvementStock extends AbstractEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "menage_id")
+	@JsonIgnore
 	private Menage menage;
 	
 	@ManyToOne 

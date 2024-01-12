@@ -27,7 +27,7 @@ public class MenageValidator {
 			errors.add("Veuillez renseigner le numero de telephone");
 		}
 		
-		if(!StringUtils.hasLength(menageDto.getLangueParlee().name())) {
+		if(!StringUtils.hasLength(menageDto.getLangueParlee())) {
 			errors.add("Veuillez renseigner la langue parlee");
 		}
 		

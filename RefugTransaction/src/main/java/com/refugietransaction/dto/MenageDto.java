@@ -6,7 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.refugietransaction.model.Camp;
 import com.refugietransaction.model.Menage;
-import com.refugietransaction.model.TypeLangue;
 
 import lombok.Builder;
 import lombok.Data;
@@ -19,9 +18,8 @@ public class MenageDto {
 	private Long idNumber;
 	private String personneContact;
 	private String numTelephone;
-	private TypeLangue langueParlee;
+	private String langueParlee;
 	private Integer nombrePersonnes;
-	
 	@JsonIgnore
 	private Camp camp;
 	private Instant creationDate;

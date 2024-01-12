@@ -14,5 +14,5 @@ public interface MenageService {
 	
 	List<MenageDto> findAll();
 
-	List<MouvementStockDto> findHistoriqueMouvementStock(Long idProduit, Long idMenage);
+	void delete(Long id);
 }

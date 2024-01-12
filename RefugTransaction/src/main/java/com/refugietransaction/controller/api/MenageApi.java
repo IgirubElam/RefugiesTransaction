@@ -42,14 +42,12 @@ public interface MenageApi {
     })
     @GetMapping(value = Constants.APP_ROOT + "/menages/all", produces = MediaType.APPLICATION_JSON_VALUE)
     List<MenageDto> findAll();
-
-    @ApiOperation(value = "Trouver l'historique des mouvements de stock d'un produit dans un ménage", notes = "Cette methode permet de trouver l'historique des mouvements de stock d'un produit dans un ménage",
-    		responseContainer = "List<MouvementStockDto>")
+    
+    @ApiOperation(value = "Supprimer un menage par son ID", notes = "Cette methode permet de supprimer un menage")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "L'historique des mouvements de stock a ete trouve"),
-            @ApiResponse(code = 404, message = "Aucun ménage ou produit correspondant n'a ete trouve dans la BDD")
+    		@ApiResponse(code = 200, message = "Le menage a ete supprime")
     })
-    @GetMapping(value = Constants.APP_ROOT + "/menages/historiqueMouvementStock/{idProduit}/{idMenage}", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<MouvementStockDto> findHistoriqueMouvementStock(@PathVariable("idProduit") Long idProduit, @PathVariable("idMenage") Long idMenage);
+    @DeleteMapping(value = Constants.APP_ROOT+ "/menages/delete/{idMenage}")
+    void delete(@PathVariable("idMenage") Long id);
     
 }

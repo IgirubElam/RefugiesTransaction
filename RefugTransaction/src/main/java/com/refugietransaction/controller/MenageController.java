@@ -37,8 +37,9 @@ public class MenageController implements MenageApi {
 	}
 
 	@Override
-	public List<MouvementStockDto> findHistoriqueMouvementStock(Long idProduit, Long idMenage) {
-		return menageService.findHistoriqueMouvementStock(idProduit, idMenage);
+	public void delete(Long id) {
+		menageService.delete(id);
+		
 	}
 
 }

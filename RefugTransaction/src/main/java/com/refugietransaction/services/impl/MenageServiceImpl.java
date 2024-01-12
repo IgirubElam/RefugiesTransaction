@@ -3,6 +3,7 @@ package com.refugietransaction.services.impl;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
 import com.refugietransaction.exceptions.InvalidEntityException;
 import com.refugietransaction.model.Menage;
+import com.refugietransaction.model.MouvementStock;
 import com.refugietransaction.repository.MenageRepository;
 import com.refugietransaction.repository.MouvementStockRepository;
 import com.refugietransaction.services.MenageService;
@@ -51,6 +53,19 @@ public class MenageServiceImpl implements MenageService {
 	    			Collections.singletonList("Un autre menage avec le meme numero existe deja dans la BDD"));
 	    }
 	    
+	    if(phoneNumberAlreadyExists(dto.getNumTelephone())) {
+	    	throw new InvalidEntityException("Une autre personne de contact avec le meme numero de telephone existe deja", ErrorCodes.MENAGE_PHONE_NUMBER_ALREADY_EXISTS,
+	    			Collections.singletonList("Une autre personne de contact avec le meme numero de telephone existe dans la BDD"));
+	    }
+	    
+	    if(dto.getId()==null) {
+	    	dto.setIdNumber(randomNumber());
+	    }
+	    else {
+	    	Long m=menageRepository.findMenageById(dto.getId()).getIdNumber();
+	    	dto.setIdNumber(m);
+	    }
+	    
 		return MenageDto.fromEntity(
 				menageRepository.save(MenageDto.toEntity(dto))
 		);
@@ -59,6 +74,20 @@ public class MenageServiceImpl implements MenageService {
 	private boolean menageAlreadyExists(Long id_number) {
 		Optional<Menage> menage = menageRepository.findMenageByIdNumber(id_number);
 		return menage.isPresent();
+	}
+	
+	private boolean phoneNumberAlreadyExists(String phone_number) {
+		Optional<Menage> menage = menageRepository.findMenageByPhoneNumber(phone_number);
+		return menage.isPresent();
+	}
+	
+	private Optional<Menage> menageIdNumber(Long id){
+		return menageRepository.findById(id);
+	}
+	
+	private Long randomNumber() {
+		ThreadLocalRandom random=ThreadLocalRandom.current();
+		return random.nextLong(100000, 1000000);
 	}
 
 	@Override
@@ -86,11 +115,18 @@ public class MenageServiceImpl implements MenageService {
 
 
 	@Override
-	public List<MouvementStockDto> findHistoriqueMouvementStock(Long idProduit, Long idMenage) {
+	public void delete(Long id) {
 		
-		return mouvementStockRepository.findAllByArticleIdAndMenageId(idProduit, idMenage).stream()
-				.map(MouvementStockDto::fromEntity)
-				.collect(Collectors.toList());
+		if(id == null) {
+			log.error("Menage ID is null");
+		}
+		List<MouvementStock> mouvementStocks = mouvementStockRepository.findAllById(id);
+		if(!mouvementStocks.isEmpty()) {
+			throw new InvalidEntityException("Impossible de supprimer un menage ayant au moins un mouvement stock",
+					ErrorCodes.MENAGE_ALREADY_IN_USE);
+		}
+		menageRepository.deleteById(id);
+		
 	}
 	
 }

@@ -15,5 +15,11 @@ public interface MenageRepository extends JpaRepository<Menage, Long> {
 	// JPQL query
 	@Query(value = "select m from Menage m where m.idNumber = :idNumber")
 	Optional<Menage> findMenageByIdNumber(@Param("idNumber") Long idNumber);
+	
+	@Query(value = "select m from Menage m where m.id = :id")
+	Menage findMenageById(@Param("id") Long id);
+	
+	@Query(value = "select m from Menage m where m.numTelephone = :numTelephone")
+	Optional<Menage> findMenageByPhoneNumber(@Param("numTelephone") String numTelephone);
 
 }

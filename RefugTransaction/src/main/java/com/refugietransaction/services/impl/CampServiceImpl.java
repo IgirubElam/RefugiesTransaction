@@ -95,7 +95,6 @@ public class CampServiceImpl implements CampService {
 		
 		if(id == null) {
 			log.error("Camp ID is null");
-			return;
 		}
 		List<Menage> menages = menageRepository.findAllById(id);
 		List<com.refugietransaction.model.Agent> agents = agentRepository.findAllById(id);

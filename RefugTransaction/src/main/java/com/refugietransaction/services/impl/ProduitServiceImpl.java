@@ -93,7 +93,6 @@ public class ProduitServiceImpl implements ProduitService {
 		
 		if(id == null) {
 			log.error("Produit ID is null");
-			return;
 		}
 		List<MouvementStock> mouvementStocks = mouvementStockRepository.findAllById(id);
 		if(!mouvementStocks.isEmpty()) {
