@@ -1,6 +1,7 @@
 package com.refugietransaction.services.impl;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,6 +100,31 @@ public class MouvementStockServiceImpl implements MouvementStockService {
 		return MouvementStockDto.fromEntity(
 				mouvementStockRepository.save(MouvementStockDto.toEntity(dto))
 		);
+	}
+
+	@Override
+	public List<MouvementStockDto> entreeArticleCamp(Long idProduit, Long idAgent) {
+		
+		return mouvementStockRepository.findEntreeByIdProduitIdCamp(idProduit, idAgent).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleCamp(Long idProduit, Long idAgent) {
+		
+		return mouvementStockRepository.findSortieByIdProduitIdCamp(idProduit, idAgent).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idAgent, Instant creationDate,
+			Instant lastModifiedDate) {
+		
+		return mouvementStockRepository.findEntreeByIdProduitIdCampPeriode(idProduit, idAgent, creationDate, lastModifiedDate).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
 	}
 	
 
