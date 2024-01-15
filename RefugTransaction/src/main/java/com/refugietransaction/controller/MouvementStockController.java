@@ -42,22 +42,88 @@ public class MouvementStockController implements MouvementStockApi {
 	public MouvementStockDto sortieStock(MouvementStockDto dto) {
 		return mouvementStockService.sortieStock(dto);
 	}
-
+	
+	//Pour le camp
+	
 	@Override
-	public List<MouvementStockDto> entreeArticleCamp(Long idProduit, Long idAgent) {
-		return mouvementStockService.entreeArticleCamp(idProduit, idAgent);
+	public List<MouvementStockDto> entreeArticleCamp(Long idProduit, Long idCamp) {
+		return mouvementStockService.entreeArticleCamp(idProduit, idCamp);
 	}
 
 	@Override
-	public List<MouvementStockDto> sortieArticleCamp(Long idProduit, Long idAgent) {
-		return mouvementStockService.sortieArticleCamp(idProduit, idAgent);
+	public List<MouvementStockDto> sortieArticleCamp(Long idProduit, Long idCamp) {
+		return mouvementStockService.sortieArticleCamp(idProduit, idCamp);
 	}
 
 	@Override
-	public List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idAgent, Instant creationDate,
-			Instant lastModifiedDate) {
+	public List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate,
+			Instant endDate) {
 		
-		return mouvementStockService.entreeArticleCampPeriode(idProduit, idAgent, creationDate, lastModifiedDate);
+		return mouvementStockService.entreeArticleCampPeriode(idProduit, idCamp, startDate, endDate);
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockService.sortieArticleCampPeriode(idProduit, idCamp, startDate, endDate);
+	}
+	
+	
+	//Pour le menage
+	
+	@Override
+	public List<MouvementStockDto> entreeArticleMenage(Long idProduit, Long idMenage) {
+		
+		return mouvementStockService.entreeArticleMenage(idProduit, idMenage);
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleMenage(Long idProduit, Long idMenage) {
+		
+		return mouvementStockService.sortieArticleMenage(idProduit, idMenage);
+	}
+
+	@Override
+	public List<MouvementStockDto> entreeArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockService.entreeArticleMenagePeriode(idProduit, idMenage, startDate, endDate);
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockService.sortieArticleMenagePeriode(idProduit, idMenage, startDate, endDate);
+	}
+	
+	//Pour l'agent
+
+	@Override
+	public List<MouvementStockDto> entreeArticleAgent(Long idProduit, Long idAgent) {
+		
+		return mouvementStockService.entreeArticleAgent(idProduit, idAgent);
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleAgent(Long idProduit, Long idAgent) {
+		
+		return mouvementStockService.sortieArticleAgent(idProduit, idAgent);
+	}
+
+	@Override
+	public List<MouvementStockDto> entreeArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockService.entreeArticleAgentPeriode(idProduit, idAgent, startDate, endDate);
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockService.sortieArticleAgentPeriode(idProduit, idAgent, startDate, endDate);
 	}
 
 }

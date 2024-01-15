@@ -15,11 +15,38 @@ public interface MouvementStockService {
 
 	MouvementStockDto entreeStock(MouvementStockDto dto);
 
-	MouvementStockDto sortieStock(MouvementStockDto dto); 
+	MouvementStockDto sortieStock(MouvementStockDto dto);
 	
-	List<MouvementStockDto> entreeArticleCamp(Long idProduit, Long idAgent);
+	//Pour le camp
 	
-	List<MouvementStockDto> sortieArticleCamp(Long idProduit, Long idAgent);
+	List<MouvementStockDto> entreeArticleCamp(Long idProduit, Long idCamp);
 	
-	List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idAgent, Instant creationDate, Instant lastModifiedDate);
+	List<MouvementStockDto> sortieArticleCamp(Long idProduit, Long idCamp);
+	
+	List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate, Instant endDate);
+	
+	List<MouvementStockDto> sortieArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate, Instant endDate);
+	
+	//Pour le menage
+	
+	List<MouvementStockDto> entreeArticleMenage(Long idProduit, Long idMenage);
+	
+	List<MouvementStockDto> sortieArticleMenage(Long idProduit, Long idMenage);
+	
+	List<MouvementStockDto> entreeArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate, Instant endDate);
+	
+	List<MouvementStockDto> sortieArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate, Instant endDate);
+	
+	//Pour l'agent
+	
+	List<MouvementStockDto> entreeArticleAgent(Long idProduit, Long idAgent);
+	
+	List<MouvementStockDto> sortieArticleAgent(Long idProduit, Long idAgent);
+	
+	List<MouvementStockDto> entreeArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate, Instant endDate);
+	
+	List<MouvementStockDto> sortieArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate, Instant endDate);
+	
+	
+	
 }

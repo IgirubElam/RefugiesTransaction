@@ -101,31 +101,115 @@ public class MouvementStockServiceImpl implements MouvementStockService {
 				mouvementStockRepository.save(MouvementStockDto.toEntity(dto))
 		);
 	}
+	
+	//Pour le camp
 
 	@Override
-	public List<MouvementStockDto> entreeArticleCamp(Long idProduit, Long idAgent) {
+	public List<MouvementStockDto> entreeArticleCamp(Long idProduit, Long idCamp) {
 		
-		return mouvementStockRepository.findEntreeByIdProduitIdCamp(idProduit, idAgent).stream()
+		return mouvementStockRepository.findEntreeByIdProduitIdCamp(idProduit, idCamp).stream()
 				.map(MouvementStockDto::fromEntity)
 				.collect(Collectors.toList());
 	}
 
 	@Override
-	public List<MouvementStockDto> sortieArticleCamp(Long idProduit, Long idAgent) {
+	public List<MouvementStockDto> sortieArticleCamp(Long idProduit, Long idCamp) {
 		
-		return mouvementStockRepository.findSortieByIdProduitIdCamp(idProduit, idAgent).stream()
+		return mouvementStockRepository.findSortieByIdProduitIdCamp(idProduit, idCamp).stream()
 				.map(MouvementStockDto::fromEntity)
 				.collect(Collectors.toList());
 	}
 
 	@Override
-	public List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idAgent, Instant creationDate,
-			Instant lastModifiedDate) {
+	public List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate,
+			Instant endDate) {
 		
-		return mouvementStockRepository.findEntreeByIdProduitIdCampPeriode(idProduit, idAgent, creationDate, lastModifiedDate).stream()
+		return mouvementStockRepository.findEntreeByIdProduitIdCampPeriode(idProduit, idCamp, startDate, endDate).stream()
 				.map(MouvementStockDto::fromEntity)
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockRepository.findSortieByIdProduitIdCampPeriode(idProduit, idCamp, startDate, endDate).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+	
+	//Pour le menage
+
+	@Override
+	public List<MouvementStockDto> entreeArticleMenage(Long idProduit, Long idMenage) {
+		
+		return mouvementStockRepository.findEntreeByIdProduitIdMenage(idProduit, idMenage).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleMenage(Long idProduit, Long idMenage) {
+		
+		return mouvementStockRepository.findSortieByIdProduitIdMenage(idProduit, idMenage).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> entreeArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockRepository.findEntreeByIdProduitIdMenagePeriode(idProduit, idMenage, startDate, endDate).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockRepository.findSortieByIdProduitIdMenagePeriode(idProduit, idMenage, startDate, endDate).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+	
+	//Pour l'agent
+
+	@Override
+	public List<MouvementStockDto> entreeArticleAgent(Long idProduit, Long idAgent) {
+		
+		return mouvementStockRepository.findEntreeByIdProduitIdAgent(idProduit, idAgent).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleAgent(Long idProduit, Long idAgent) {
+		
+		return mouvementStockRepository.findSortieByIdProduitIdAgent(idProduit, idAgent).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> entreeArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockRepository.findEntreeByIdProduitIdAgentPeriode(idProduit, idAgent, startDate, endDate).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate,
+			Instant endDate) {
+		
+		return mouvementStockRepository.findSortieByIdProduitIdAgentPeriode(idProduit, idAgent, startDate, endDate).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+	
 	
 
 }
