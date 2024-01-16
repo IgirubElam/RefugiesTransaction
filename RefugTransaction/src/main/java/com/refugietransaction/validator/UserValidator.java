@@ -33,11 +33,6 @@ public class UserValidator {
 		if(!StringUtils.hasLength(userDto.getPassword())) {
 			errors.add("Veuillez renseigner le mot de passe de l'utilisateur");
 		}
-
-		if (userDto.getTypeUser().name().equals("AGENT") && userDto.getAgents().isEmpty()){
-
-			errors.add("Veuillez renseigner le camp d'affectaction ");
-		}
 		
 		return errors;
 	}

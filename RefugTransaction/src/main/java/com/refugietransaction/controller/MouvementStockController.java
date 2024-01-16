@@ -2,6 +2,7 @@ package com.refugietransaction.controller;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,15 +57,15 @@ public class MouvementStockController implements MouvementStockApi {
 	}
 
 	@Override
-	public List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate,
-			Instant endDate) {
+	public List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idCamp, Date startDate,
+			Date endDate) {
 		
 		return mouvementStockService.entreeArticleCampPeriode(idProduit, idCamp, startDate, endDate);
 	}
 
 	@Override
-	public List<MouvementStockDto> sortieArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate,
-			Instant endDate) {
+	public List<MouvementStockDto> sortieArticleCampPeriode(Long idProduit, Long idCamp, Date startDate,
+			Date endDate) {
 		
 		return mouvementStockService.sortieArticleCampPeriode(idProduit, idCamp, startDate, endDate);
 	}
@@ -85,45 +86,17 @@ public class MouvementStockController implements MouvementStockApi {
 	}
 
 	@Override
-	public List<MouvementStockDto> entreeArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate,
-			Instant endDate) {
+	public List<MouvementStockDto> entreeArticleMenagePeriode(Long idProduit, Long idMenage, Date startDate,
+			Date endDate) {
 		
 		return mouvementStockService.entreeArticleMenagePeriode(idProduit, idMenage, startDate, endDate);
 	}
 
 	@Override
-	public List<MouvementStockDto> sortieArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate,
-			Instant endDate) {
+	public List<MouvementStockDto> sortieArticleMenagePeriode(Long idProduit, Long idMenage, Date startDate,
+			Date endDate) {
 		
 		return mouvementStockService.sortieArticleMenagePeriode(idProduit, idMenage, startDate, endDate);
-	}
-	
-	//Pour l'agent
-
-	@Override
-	public List<MouvementStockDto> entreeArticleAgent(Long idProduit, Long idAgent) {
-		
-		return mouvementStockService.entreeArticleAgent(idProduit, idAgent);
-	}
-
-	@Override
-	public List<MouvementStockDto> sortieArticleAgent(Long idProduit, Long idAgent) {
-		
-		return mouvementStockService.sortieArticleAgent(idProduit, idAgent);
-	}
-
-	@Override
-	public List<MouvementStockDto> entreeArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate,
-			Instant endDate) {
-		
-		return mouvementStockService.entreeArticleAgentPeriode(idProduit, idAgent, startDate, endDate);
-	}
-
-	@Override
-	public List<MouvementStockDto> sortieArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate,
-			Instant endDate) {
-		
-		return mouvementStockService.sortieArticleAgentPeriode(idProduit, idAgent, startDate, endDate);
 	}
 
 }

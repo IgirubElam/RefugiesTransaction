@@ -2,12 +2,13 @@ package com.refugietransaction.dto;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 
-import com.refugietransaction.model.Agent;
 import com.refugietransaction.model.Menage;
 import com.refugietransaction.model.MouvementStock;
 import com.refugietransaction.model.Produit;
-import com.refugietransaction.model.TypeMouvementStock; 
+import com.refugietransaction.model.TypeMouvementStock;
+import com.refugietransaction.model.User;
 
 import lombok.Builder;
 import lombok.Data;
@@ -17,12 +18,12 @@ import lombok.Data;
 public class MouvementStockDto {
 	
 	private Long id;
-	private Instant dateMouvement;
+	private Date dateMouvement;
 	private BigDecimal quantite;
 	private TypeMouvementStock typeMouvement;
 	private Menage menage;
 	private Produit produit;
-	private Agent agent;
+	private User user;
 	private Instant creationDate;
 	private Instant lastModifiedDate;
 	
@@ -39,7 +40,7 @@ public class MouvementStockDto {
 				.typeMouvement(mouvementStock.getTypeMouvement())
 				.menage(mouvementStock.getMenage())
 				.produit(mouvementStock.getProduit())
-				.agent(mouvementStock.getAgent())
+				.user(mouvementStock.getUser())
 				.creationDate(mouvementStock.getCreationDate())
 				.lastModifiedDate(mouvementStock.getLastModifiedDate())
 				.build();
@@ -58,7 +59,7 @@ public class MouvementStockDto {
 		mouvementStock.setTypeMouvement(mouvementStockDto.getTypeMouvement());
 		mouvementStock.setMenage(mouvementStockDto.getMenage());
 		mouvementStock.setProduit(mouvementStockDto.getProduit());
-		mouvementStock.setAgent(mouvementStockDto.getAgent());
+		mouvementStock.setUser(mouvementStockDto.getUser());
 		mouvementStock.setCreationDate(mouvementStockDto.getCreationDate());
 		mouvementStock.setLastModifiedDate(mouvementStockDto.getLastModifiedDate());
 		

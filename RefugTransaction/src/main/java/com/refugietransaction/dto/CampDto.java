@@ -21,9 +21,6 @@ public class CampDto {
 	@JsonIgnore
 	private List<MenageDto> menages;
 	
-	@JsonIgnore
-	private List<AgentDto> agents;
-	
 	public static CampDto fromEntity(Camp camp) {
 		if(camp == null){
 			return null;

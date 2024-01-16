@@ -1,16 +1,13 @@
 package com.refugietransaction.services.impl;
 
-import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.aspectj.weaver.loadtime.Agent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.refugietransaction.dto.AgentDto;
 import com.refugietransaction.dto.CampDto;
 import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
@@ -18,11 +15,9 @@ import com.refugietransaction.exceptions.InvalidEntityException;
 import com.refugietransaction.exceptions.InvalidOperationException;
 import com.refugietransaction.model.Camp;
 import com.refugietransaction.model.Menage;
-import com.refugietransaction.repository.AgentRepository;
 import com.refugietransaction.repository.CampRepository;
 import com.refugietransaction.repository.MenageRepository;
 import com.refugietransaction.services.CampService;
-import com.refugietransaction.validator.AgentValidator;
 import com.refugietransaction.validator.CampValidator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,13 +28,11 @@ public class CampServiceImpl implements CampService {
 	
 	private CampRepository campRepository;
 	private MenageRepository menageRepository;
-	private AgentRepository agentRepository;
 	
 	@Autowired
-	public CampServiceImpl(CampRepository campRepository, MenageRepository menageRepository, AgentRepository agentRepository) {
+	public CampServiceImpl(CampRepository campRepository, MenageRepository menageRepository) {
 		this.campRepository = campRepository;
 		this.menageRepository = menageRepository;
-		this.agentRepository = agentRepository;
 	}
 	
 	@Override
@@ -48,7 +41,6 @@ public class CampServiceImpl implements CampService {
 		List<String> errors = CampValidator.validate(dto);
 		if(!errors.isEmpty()) {
 			log.error("Menage is not valid {}", dto);
-			log.error("Agent is not valid {}", dto);
 			throw new InvalidEntityException("Le camp n'est pas valide", ErrorCodes.CAMP_NOT_VALID, errors);
 		}
 		
@@ -97,16 +89,11 @@ public class CampServiceImpl implements CampService {
 			log.error("Camp ID is null");
 		}
 		List<Menage> menages = menageRepository.findAllById(id);
-		List<com.refugietransaction.model.Agent> agents = agentRepository.findAllById(id);
 		if(!menages.isEmpty()) {
 			throw new InvalidOperationException("Impossible de supprimer un camp ayant au moins une menage",
 					ErrorCodes.CAMP_ALREADY_IN_USE);
 		}
 		
-		if(!agents.isEmpty()) {
-			throw new InvalidOperationException("Impossible de supprimer un camp ayant au moins un affectation agent",
-					ErrorCodes.CAMP_ALREADY_IN_USE);
-		}
 		campRepository.deleteById(id);
 		
 	}

@@ -4,8 +4,6 @@ import java.time.Instant;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.refugietransaction.model.Administrator;
-import com.refugietransaction.model.Agent;
 import com.refugietransaction.model.TypeUser;
 import com.refugietransaction.model.User;
 
@@ -24,13 +22,6 @@ public class UserDto {
 	private TypeUser typeUser;
 	private Instant creationDate;
 	private Instant lastModifiedDate;
-	
-	
-	@JsonIgnore
-	private List<AdministratorDto> administrators;
-	
-	@JsonIgnore
-	private List<AgentDto> agents;
 	
 	public static UserDto fromEntity(User user) {
 		if(user == null) {

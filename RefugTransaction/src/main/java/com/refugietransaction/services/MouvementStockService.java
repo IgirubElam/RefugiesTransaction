@@ -2,6 +2,7 @@ package com.refugietransaction.services;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import com.refugietransaction.dto.MouvementStockDto;
@@ -23,9 +24,9 @@ public interface MouvementStockService {
 	
 	List<MouvementStockDto> sortieArticleCamp(Long idProduit, Long idCamp);
 	
-	List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate, Instant endDate);
+	List<MouvementStockDto> entreeArticleCampPeriode(Long idProduit, Long idCamp, Date startDate, Date endDate);
 	
-	List<MouvementStockDto> sortieArticleCampPeriode(Long idProduit, Long idCamp, Instant startDate, Instant endDate);
+	List<MouvementStockDto> sortieArticleCampPeriode(Long idProduit, Long idCamp, Date startDate, Date endDate);
 	
 	//Pour le menage
 	
@@ -33,19 +34,9 @@ public interface MouvementStockService {
 	
 	List<MouvementStockDto> sortieArticleMenage(Long idProduit, Long idMenage);
 	
-	List<MouvementStockDto> entreeArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate, Instant endDate);
+	List<MouvementStockDto> entreeArticleMenagePeriode(Long idProduit, Long idMenage, Date startDate, Date endDate);
 	
-	List<MouvementStockDto> sortieArticleMenagePeriode(Long idProduit, Long idMenage, Instant startDate, Instant endDate);
-	
-	//Pour l'agent
-	
-	List<MouvementStockDto> entreeArticleAgent(Long idProduit, Long idAgent);
-	
-	List<MouvementStockDto> sortieArticleAgent(Long idProduit, Long idAgent);
-	
-	List<MouvementStockDto> entreeArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate, Instant endDate);
-	
-	List<MouvementStockDto> sortieArticleAgentPeriode(Long idProduit, Long idAgent, Instant startDate, Instant endDate);
+	List<MouvementStockDto> sortieArticleMenagePeriode(Long idProduit, Long idMenage, Date startDate, Date endDate);
 	
 	
 	

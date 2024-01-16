@@ -12,10 +12,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "administrator")
-public class Administrator extends AbstractEntity {
+@Table(name = "user_assignment")
+public class UserAssignment extends AbstractEntity {
 	
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "camp_id")
+	private Camp camp;
 }

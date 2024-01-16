@@ -1,6 +1,7 @@
 package com.refugietransaction.model;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,5 +25,5 @@ public class Camp extends AbstractEntity {
 	private List<Menage> menages;
 	
 	@OneToMany(mappedBy = "camp")
-	private List<Agent> agents;
+	private Set<UserAssignment> userAssignments;
 }

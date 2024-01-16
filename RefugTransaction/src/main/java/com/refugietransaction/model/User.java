@@ -1,6 +1,7 @@
 package com.refugietransaction.model;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,8 +37,5 @@ public class User extends AbstractEntity {
 	private TypeUser typeUser;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Administrator> administrators;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Agent> agents;
+	private Set<UserAssignment> userAssignments;
 }

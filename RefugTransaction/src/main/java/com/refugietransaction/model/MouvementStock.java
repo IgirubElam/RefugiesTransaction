@@ -2,6 +2,7 @@ package com.refugietransaction.model;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +29,7 @@ public class MouvementStock extends AbstractEntity {
 	
 	@Column(name = "date_mouvement")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Instant dateMouvement;
+	private Date dateMouvement;
 	
 	@Column(name = "quantite")
 	private BigDecimal quantite;
@@ -46,7 +47,7 @@ public class MouvementStock extends AbstractEntity {
 	@JoinColumn(name = "id_article")
 	private Produit produit;
 	
-	@ManyToOne
-	@JoinColumn(name = "agent_id")
-	private Agent agent;
+	@ManyToOne 
+	@JoinColumn(name = "user_id")
+	private User user;
 }
