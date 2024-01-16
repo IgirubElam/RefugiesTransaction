@@ -98,5 +98,34 @@ public class MouvementStockController implements MouvementStockApi {
 		
 		return mouvementStockService.sortieArticleMenagePeriode(idProduit, idMenage, startDate, endDate);
 	}
+	
+	
+	//Pour l'agent
+
+	@Override
+	public List<MouvementStockDto> entreeArticleUser(Long idProduit, Long idUser) {
+			
+		return mouvementStockService.entreeArticleUser(idProduit, idUser);
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleUser(Long idProduit, Long idUser) {
+			
+		return mouvementStockService.sortieArticleUser(idProduit, idUser);
+	}
+
+	@Override
+	public List<MouvementStockDto> entreeArticleUserPeriode(Long idProduit, Long idUser, Date startDate,
+			Date endDate) {
+			
+		return mouvementStockService.entreeArticleUserPeriode(idProduit, idUser, startDate, endDate);
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleUserPeriode(Long idProduit, Long idUser, Date startDate,
+			Date endDate) {
+			
+		return mouvementStockService.sortieArticleUserPeriode(idProduit, idUser, startDate, endDate);
+	}
 
 }

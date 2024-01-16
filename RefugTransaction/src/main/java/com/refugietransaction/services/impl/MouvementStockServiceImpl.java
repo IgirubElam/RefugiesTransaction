@@ -175,6 +175,39 @@ public class MouvementStockServiceImpl implements MouvementStockService {
 				.collect(Collectors.toList());
 	}
 	
+	@Override
+	public List<MouvementStockDto> entreeArticleUser(Long idProduit, Long idUser) {
+		
+		return mouvementStockRepository.findEntreeByIdProduitIdAgent(idProduit, idUser).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleUser(Long idProduit, Long idUser) {
+		
+		return mouvementStockRepository.findSortieByIdProduitIdAgent(idProduit, idUser).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> entreeArticleUserPeriode(Long idProduit, Long idUser, Date startDate,
+			Date endDate) {
+		
+		return mouvementStockRepository.findEntreeByIdProduitIdAgentPeriode(idProduit, idUser, startDate, endDate).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MouvementStockDto> sortieArticleUserPeriode(Long idProduit, Long idUser, Date startDate,
+			Date endDate) {
+		
+		return mouvementStockRepository.findSortieByIdProduitIdAgentPeriode(idProduit, idUser, startDate, endDate).stream()
+				.map(MouvementStockDto::fromEntity)
+				.collect(Collectors.toList());
+	}
 	
 	
 

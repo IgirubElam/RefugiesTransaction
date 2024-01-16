@@ -64,6 +64,19 @@ public interface MouvementStockApi {
     @GetMapping(value = Constants.APP_ROOT + "/mouvementStocks/sortie/produit/menage/periode/{idProduit}/{idMenage}/{startDate}/{endDate}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<MouvementStockDto> sortieArticleMenagePeriode(@PathVariable("idProduit") Long idProduit, @PathVariable("idMenage") Long idMenage, @PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date startDate, @PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date endDate);
     
+    //Pour l'utilisateur
+    
+    @GetMapping(value = Constants.APP_ROOT + "/mouvementStocks/entree/produit/user/{idProduit}/{idUser}", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<MouvementStockDto> entreeArticleUser(@PathVariable("idProduit") Long idProduit, @PathVariable("idUser") Long idUser);
+    
+    @GetMapping(value = Constants.APP_ROOT + "/mouvementStocks/sortie/produit/user/{idProduit}/{idUser}", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<MouvementStockDto> sortieArticleUser(@PathVariable("idProduit") Long idProduit, @PathVariable("idUser") Long idUser);
+    
+    @GetMapping(value = Constants.APP_ROOT + "/mouvementStocks/entree/produit/user/periode/{idProduit}/{idUser}/{startDate}/{endDate}", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<MouvementStockDto> entreeArticleUserPeriode(@PathVariable("idProduit") Long idProduit, @PathVariable("idUser") Long idUser, @PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date startDate, @PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date endDate);
+    
+    @GetMapping(value = Constants.APP_ROOT + "/mouvementStocks/sortie/produit/user/periode/{idProduit}/{idUser}/{startDate}/{endDate}", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<MouvementStockDto> sortieArticleUserPeriode(@PathVariable("idProduit") Long idProduit, @PathVariable("idUser") Long idUser, @PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date startDate, @PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date endDate);
     
     
     

@@ -39,5 +39,14 @@ public interface MouvementStockService {
 	List<MouvementStockDto> sortieArticleMenagePeriode(Long idProduit, Long idMenage, Date startDate, Date endDate);
 	
 	
+	//Pour l'utilisateur
+	
+	List<MouvementStockDto> entreeArticleUser(Long idProduit, Long idUser);
+		
+	List<MouvementStockDto> sortieArticleUser(Long idProduit, Long idUser);
+		
+	List<MouvementStockDto> entreeArticleUserPeriode(Long idProduit, Long idUser, Date startDate, Date endDate);
+		
+	List<MouvementStockDto> sortieArticleUserPeriode(Long idProduit, Long idUser, Date startDate, Date endDate);
 	
 }

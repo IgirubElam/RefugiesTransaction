@@ -54,5 +54,22 @@ public interface MouvementStockRepository extends JpaRepository<MouvementStock, 
 	List<MouvementStock> findSortieByIdProduitIdMenagePeriode(@Param("idProduit") Long idProduit, @Param("idMenage") Long idMenage, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 	
 	
+	//Liste des entrees de stock d'un produit donné effectuées par un utilisateur donné
+	@Query("select m from MouvementStock m where m.produit.id = :idProduit AND m.user.id = :idUser AND m.typeMouvement = 'ENTREE' ")
+	List<MouvementStock> findEntreeByIdProduitIdAgent(@Param("idProduit") Long idProduit, @Param("idUser") Long idUser);
+		
+	//Liste des sorties de stock d'un produit donné effectuées par un agent donné
+	@Query("select m from MouvementStock m where m.produit.id = :idProduit AND m.user.id =:idUser AND m.typeMouvement = 'SORTIE' ")
+	List<MouvementStock> findSortieByIdProduitIdAgent(@Param("idProduit") Long idProduit, @Param("idUser") Long idUser);
+		
+	//Liste des entrees de stock d'un produit donné effectuées par un agent donné pour une poriode donnée
+	@Query("select m from MouvementStock m where m.produit.id = :idProduit AND m.user.id = :idUser AND m.typeMouvement = 'ENTREE' AND m.dateMouvement BETWEEN :startDate AND :endDate ")
+	List<MouvementStock> findEntreeByIdProduitIdAgentPeriode(@Param("idProduit") Long idProduit, @Param("idUser") Long idUser, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+		
+	//Liste des sorties de stock d'un produit donné effectuées par un agent donné pour une periode donnée
+	@Query("select m from MouvementStock m where m.produit.id = :idProduit AND m.user.id = :idUser AND m.typeMouvement = 'SORTIE' AND m.dateMouvement BETWEEN :startDate AND :endDate ")
+	List<MouvementStock> findSortieByIdProduitIdAgentPeriode(@Param("idProduit") Long idProduit, @Param("idUser") Long idUser, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+	
+	
 	
 }
