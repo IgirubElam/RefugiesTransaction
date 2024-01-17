@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.refugietransaction.controller.api.UserApi;
+import com.refugietransaction.dto.UserAssignmentDto;
 import com.refugietransaction.dto.UserDto;
 import com.refugietransaction.services.UserService;
 
@@ -20,8 +21,8 @@ public class UserController implements UserApi {
 	}
 
 	@Override
-	public UserDto save(UserDto dto) {
-		return userService.save(dto);
+	public UserDto save(UserDto dto, UserAssignmentDto userAssignmentDto) {
+		return userService.save(dto, userAssignmentDto);
 	}
 
 	@Override

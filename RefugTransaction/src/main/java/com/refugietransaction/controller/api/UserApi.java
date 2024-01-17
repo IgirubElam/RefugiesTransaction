@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.refugietransaction.dto.UserAssignmentDto;
 import com.refugietransaction.dto.UserDto;
 import com.refugietransaction.utils.Constants;
 
@@ -25,7 +26,7 @@ public interface UserApi {
 			@ApiResponse(code = 400, message = "L'utilisateur n'est pas valide")
 	})
 	@PostMapping(value = Constants.APP_ROOT + "/utilisateurs/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	UserDto save(@RequestBody UserDto dto);
+	UserDto save(@RequestBody UserDto dto, UserAssignmentDto userAssignmentDto);
 	
 	@ApiOperation(value = "Rechercher un utilisateur", notes = "Cette methode permet de chercher un utilisateur par ID", response = UserDto.class)
 	@ApiResponses(value = {

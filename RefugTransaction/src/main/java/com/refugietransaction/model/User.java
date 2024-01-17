@@ -38,5 +38,5 @@ public class User extends AbstractEntity {
 	private TypeUser typeUser;
 	
 	@OneToOne(mappedBy = "user")
-	private Set<UserAssignment> userAssignments;
+	private UserAssignment userAssignments;
 }
