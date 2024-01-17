@@ -33,6 +33,9 @@ public class UserValidator {
 		if(!StringUtils.hasLength(userDto.getPassword())) {
 			errors.add("Veuillez renseigner le mot de passe de l'utilisateur");
 		}
+		if(!StringUtils.hasLength(userDto.getPassword())) {
+			errors.add("Veuillez renseigner le mot de passe de l'utilisateur");
+		}
 		
 		return errors;
 	}

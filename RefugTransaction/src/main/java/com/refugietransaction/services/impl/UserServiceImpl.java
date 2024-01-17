@@ -6,7 +6,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.refugietransaction.dto.ChangerUserPasswordDto;
+import com.refugietransaction.dto.UserAssignmentDto;
+import com.refugietransaction.model.TypeUser;
 import com.refugietransaction.model.User;
+import com.refugietransaction.model.UserAssignment;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -16,8 +20,10 @@ import com.refugietransaction.exceptions.EntityNotFoundException;
 import com.refugietransaction.exceptions.ErrorCodes;
 import com.refugietransaction.exceptions.InvalidEntityException;
 import com.refugietransaction.exceptions.InvalidOperationException;
+import com.refugietransaction.repository.UserAssignmentRepository;
 import com.refugietransaction.repository.UserRepository;
 import com.refugietransaction.services.UserService;
+import com.refugietransaction.validator.UserAssignmentValidator;
 import com.refugietransaction.validator.UserValidator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,28 +33,56 @@ import lombok.extern.slf4j.Slf4j;
 public class UserServiceImpl implements UserService {
 	
 	private final UserRepository userRepository;
+	private final UserAssignmentRepository userAssignmentRepository;
 	
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository, UserAssignmentRepository userAssignmentRepository) {
 		this.userRepository = userRepository;
+		this.userAssignmentRepository = userAssignmentRepository;
 	}
 	
 	@Override
-	public UserDto save(UserDto userDto) {
+	public UserDto save(UserDto userDto, UserAssignmentDto userAssignmentDto) {
 
 		List<String> errors = UserValidator.validate(userDto);
-
+		
 		if (!errors.isEmpty()) {
 			log.error("Utilisateur is not valid {}", userDto);
 			throw new InvalidEntityException("L'utilisateur n'est pas valide", ErrorCodes.UTILISATEUR_NOT_VALID, errors);
+		}
+		
+		if(TypeUser.AGENT.equals(userDto.getTypeUser())) {
+			List<String> assignmentErrors = UserAssignmentValidator.validate(userAssignmentDto);
+			
+			if(!assignmentErrors.isEmpty()) {
+				log.error("L'assignation d'utilisateur n'est pas valide {}", userAssignmentDto);
+				throw new InvalidEntityException("L'assignation d'utilisateur n'est pas valide", ErrorCodes.UTILISATEUR_NOT_VALID, assignmentErrors);
+			}
 		}
 
 		if(userAlreadyExists(userDto.getEmail())) {
 			throw new InvalidEntityException("Un autre utilisateur avec le meme email existe deja", ErrorCodes.UTILISATEUR_ALREADY_EXISTS,
 					Collections.singletonList("Un autre utilisateur avec le meme email existe deja dans la BDD"));
 		}
+		
+		//variable qui stocke le user enregistré
+		User savedUser = userRepository.save(UserDto.toEntity(userDto));
+		
+		if(TypeUser.AGENT.equals(userDto.getTypeUser())){
+			userAssignmentDto.setUser(savedUser);
+			saveUserAssignment(userAssignmentDto);
+		}
 
-		return UserDto.fromEntity(userRepository.save(UserDto.toEntity(userDto)));
+		return UserDto.fromEntity(savedUser);
+	}
+
+	private void saveUserAssignment(UserAssignmentDto userAssignmentDto) {
+		UserAssignment userAssignment = new UserAssignment();
+		userAssignment.setUser(userAssignmentDto.getUser());
+		userAssignment.setCamp(userAssignmentDto.getCamp());
+		
+		userAssignmentRepository.save(userAssignment);
+		
 	}
 
 	private boolean userAlreadyExists(String email) {

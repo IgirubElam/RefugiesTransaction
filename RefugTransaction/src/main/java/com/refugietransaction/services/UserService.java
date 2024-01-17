@@ -2,11 +2,12 @@ package com.refugietransaction.services;
 
 import java.util.List;
 import com.refugietransaction.dto.ChangerUserPasswordDto;
+import com.refugietransaction.dto.UserAssignmentDto;
 import com.refugietransaction.dto.UserDto;
 
 public interface UserService {
 	
-	UserDto save(UserDto dto);
+	UserDto save(UserDto dto, UserAssignmentDto userAssignmentdto);
 	
 	UserDto findById(Long id);
 	

@@ -46,7 +46,7 @@ public class ProduitServiceImpl implements ProduitService {
 		
 		List<String> errors = ProduitValidator.validate(dto);
 	    if (!errors.isEmpty()) {
-	      log.error("Mouvement Stock is not valid {}", dto);
+	      log.error("Product is not valid {}", dto);
 	      throw new InvalidEntityException("Le produit n'est pas valide", ErrorCodes.PRODUCT_NOT_VALID, errors);
 	    }
 	    
