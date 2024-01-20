@@ -26,14 +26,14 @@ public interface UserApi {
 			@ApiResponse(code = 400, message = "L'utilisateur n'est pas valide")
 	})
 	@PostMapping(value = Constants.APP_ROOT + "/utilisateurs/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	UserDto save(@RequestBody UserDto dto, UserAssignmentDto userAssignmentDto);
+	UserDto save(@RequestBody UserDto dto);
 	
 	@ApiOperation(value = "Rechercher un utilisateur", notes = "Cette methode permet de chercher un utilisateur par ID", response = UserDto.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "L'objet utilisateur a été trouvé"),
 			@ApiResponse(code = 400, message = "L'utilisateur n'a pas été trouvé")
 	})
-	@GetMapping(value = Constants.APP_ROOT + "/utilisateurs/{idUser}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = Constants.APP_ROOT + "/utilisateurs/idUser/{idUser}", produces = MediaType.APPLICATION_JSON_VALUE)
 	UserDto findById(@PathVariable("idUser") Long idUser);
 	
 	@ApiOperation(value = "Rechercher un utilisateur par email", notes = "Cette methode permet de chercher un utilisateur par email", response = UserDto.class)
@@ -41,7 +41,7 @@ public interface UserApi {
 			@ApiResponse(code = 200, message = "L'objet utilisateur a été trouvé"),
 			@ApiResponse(code = 400, message = "L'utilisateur n'a pas été trouvé")
 	})
-	@GetMapping(value = Constants.APP_ROOT + "/utilisateurs/{Email}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = Constants.APP_ROOT + "/utilisateurs/email/{Email}", produces = MediaType.APPLICATION_JSON_VALUE)
 	UserDto findByEmail(@PathVariable("email") String email);
 	
 	@ApiOperation(value = "Rechercher la liste des utilisateurs", notes = "Cette methode permet de chercher et envoyer la liste des utilisateurs", response = UserDto.class)

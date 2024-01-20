@@ -7,7 +7,7 @@ import com.refugietransaction.dto.UserDto;
 
 public interface UserService {
 	
-	UserDto save(UserDto dto, UserAssignmentDto userAssignmentdto);
+	UserDto save(UserDto dto);
 	
 	UserDto findById(Long id);
 	

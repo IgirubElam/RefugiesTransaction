@@ -15,13 +15,12 @@ import lombok.Data;
 public class UserDto {
 	
 	private Long id;
-	private String userName;
+	private String userFullName;
 	private String phoneNumber;
 	private String email;
 	private String password;
 	private TypeUser typeUser;
-	private Instant creationDate;
-	private Instant lastModifiedDate;
+	private UserAssignmentDto userAssignment;
 	
 	public static UserDto fromEntity(User user) {
 		if(user == null) {
@@ -29,15 +28,15 @@ public class UserDto {
 			//TODO throw an exception
 		}
 		
+		
 		return UserDto.builder()
 				.id(user.getId())
-				.userName(user.getUserName())
+				.userFullName(user.getUserFullName())
 				.phoneNumber(user.getPhoneNumber())
 				.email(user.getEmail())
 				.password(user.getPassword())
 				.typeUser(user.getTypeUser())
-				.creationDate(user.getCreationDate())
-				.lastModifiedDate(user.getLastModifiedDate())
+				.userAssignment(UserAssignmentDto.fromEntity(user.getUserAssignment()))
 				.build();
 	}
 	
@@ -49,13 +48,12 @@ public class UserDto {
 		
 		User user = new User();
 		user.setId(userDto.getId());
-		user.setUserName(userDto.getUserName());
+		user.setUserFullName(userDto.getUserFullName());
 		user.setPhoneNumber(userDto.getPhoneNumber());
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
 		user.setTypeUser(userDto.getTypeUser());
-		user.setCreationDate(userDto.getCreationDate());
-		user.setLastModifiedDate(userDto.getLastModifiedDate());
+		user.setUserAssignment(UserAssignmentDto.toEntity(userDto.getUserAssignment()));
 		
 		return user;
 	}

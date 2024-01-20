@@ -21,8 +21,8 @@ public class UserController implements UserApi {
 	}
 
 	@Override
-	public UserDto save(UserDto dto, UserAssignmentDto userAssignmentDto) {
-		return userService.save(dto, userAssignmentDto);
+	public UserDto save(UserDto dto) {
+		return userService.save(dto);
 	}
 
 	@Override

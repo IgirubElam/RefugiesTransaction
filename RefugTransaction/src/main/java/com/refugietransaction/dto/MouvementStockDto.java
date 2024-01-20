@@ -21,11 +21,9 @@ public class MouvementStockDto {
 	private Date dateMouvement;
 	private BigDecimal quantite;
 	private TypeMouvementStock typeMouvement;
-	private Menage menage;
-	private Produit produit;
-	private User user;
-	private Instant creationDate;
-	private Instant lastModifiedDate;
+	private MenageDto menage;
+	private ProduitDto produit;
+	private UserDto user;
 	
 	public static MouvementStockDto fromEntity(MouvementStock mouvementStock) {
 		if(mouvementStock == null) {
@@ -38,11 +36,9 @@ public class MouvementStockDto {
 				.dateMouvement(mouvementStock.getDateMouvement())
 				.quantite(mouvementStock.getQuantite())
 				.typeMouvement(mouvementStock.getTypeMouvement())
-				.menage(mouvementStock.getMenage())
-				.produit(mouvementStock.getProduit())
-				.user(mouvementStock.getUser())
-				.creationDate(mouvementStock.getCreationDate())
-				.lastModifiedDate(mouvementStock.getLastModifiedDate())
+				.menage(MenageDto.fromEntity(mouvementStock.getMenage()))
+				.produit(ProduitDto.fromEntity(mouvementStock.getProduit()))
+				.user(UserDto.fromEntity(mouvementStock.getUser()))
 				.build();
 	}
 	
@@ -57,11 +53,9 @@ public class MouvementStockDto {
 		mouvementStock.setDateMouvement(mouvementStockDto.getDateMouvement());
 		mouvementStock.setQuantite(mouvementStockDto.getQuantite());
 		mouvementStock.setTypeMouvement(mouvementStockDto.getTypeMouvement());
-		mouvementStock.setMenage(mouvementStockDto.getMenage());
-		mouvementStock.setProduit(mouvementStockDto.getProduit());
-		mouvementStock.setUser(mouvementStockDto.getUser());
-		mouvementStock.setCreationDate(mouvementStockDto.getCreationDate());
-		mouvementStock.setLastModifiedDate(mouvementStockDto.getLastModifiedDate());
+		mouvementStock.setMenage(MenageDto.toEntity(mouvementStockDto.getMenage()));
+		mouvementStock.setProduit(ProduitDto.toEntity(mouvementStockDto.getProduit()));
+		mouvementStock.setUser(UserDto.toEntity(mouvementStockDto.getUser()));
 		
 		return mouvementStock;
 	}

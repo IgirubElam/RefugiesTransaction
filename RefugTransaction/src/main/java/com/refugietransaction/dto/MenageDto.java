@@ -21,9 +21,7 @@ public class MenageDto {
 	private String langueParlee;
 	private Integer nombrePersonnes;
 	@JsonIgnore
-	private Camp camp;
-	private Instant creationDate;
-	private Instant lastModifiedDate;
+	private CampDto camp;
 	
 	@JsonIgnore
 	private List<MouvementStockDto> mouvementStocks;
@@ -41,9 +39,7 @@ public class MenageDto {
 				.numTelephone(menage.getNumTelephone())
 				.langueParlee(menage.getLangueParlee())
 				.nombrePersonnes(menage.getNombrePersonnes())
-				.camp(menage.getCamp())
-				.creationDate(menage.getCreationDate())
-				.lastModifiedDate(menage.getLastModifiedDate())
+				.camp(CampDto.fromEntity(menage.getCamp()))
 				.build();
 	}
 	
@@ -60,9 +56,7 @@ public class MenageDto {
 		menage.setNumTelephone(menageDto.getNumTelephone());
 		menage.setLangueParlee(menageDto.getLangueParlee());
 		menage.setNombrePersonnes(menageDto.getNombrePersonnes());
-		menage.setCamp(menageDto.getCamp());
-		menage.setCreationDate(menageDto.getCreationDate());
-		menage.setLastModifiedDate(menageDto.getLastModifiedDate());
+		menage.setCamp(CampDto.toEntity(menageDto.getCamp()));
 		
 		return menage;
 	}

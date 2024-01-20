@@ -14,10 +14,8 @@ import lombok.Data;
 public class UserAssignmentDto {
 	
 	private Long id;
-	private User user;
-	private Camp camp;
-	private Instant creationDate;
-	private Instant lastModifiedDate;
+	private UserDto user;
+	private CampDto camp;
 	
 	public static UserAssignmentDto fromEntity(UserAssignment userAssignment) {
 		if(userAssignment == null) {
@@ -26,10 +24,8 @@ public class UserAssignmentDto {
 		
 		return UserAssignmentDto.builder()
 				.id(userAssignment.getId())
-				.user(userAssignment.getUser())
-				.camp(userAssignment.getCamp())
-				.creationDate(userAssignment.getCreationDate())
-				.lastModifiedDate(userAssignment.getLastModifiedDate())
+				.user(UserDto.fromEntity(userAssignment.getUser()))
+				.camp(CampDto.fromEntity(userAssignment.getCamp()))
 				.build();
 	}
 	
@@ -40,10 +36,8 @@ public class UserAssignmentDto {
 		
 		UserAssignment userAssignment = new UserAssignment();
 		userAssignment.setId(userAssignmentDto.getId());
-		userAssignment.setUser(userAssignmentDto.getUser());
-		userAssignment.setCamp(userAssignmentDto.getCamp());
-		userAssignment.setCreationDate(userAssignmentDto.getCreationDate());
-		userAssignment.setLastModifiedDate(userAssignmentDto.getLastModifiedDate());
+		userAssignment.setUser(UserDto.toEntity(userAssignmentDto.getUser()));
+		userAssignment.setCamp(CampDto.toEntity(userAssignmentDto.getCamp()));
 		
 		return userAssignment;
 	}

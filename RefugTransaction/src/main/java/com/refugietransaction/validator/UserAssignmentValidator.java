@@ -11,9 +11,10 @@ public class UserAssignmentValidator {
 		List<String> errors = new ArrayList<>();
 		
 		if(userAssignmentDto == null) {
-			errors.add("Veillez selectionner le camp");
+			errors.add("Veillez selectionner un camp");
 		}
 		
+		assert userAssignmentDto != null;
 		if(userAssignmentDto.getCamp() == null || userAssignmentDto.getCamp().getId() == null) {
 			errors.add("Veillez selectionner un camp");
 		}

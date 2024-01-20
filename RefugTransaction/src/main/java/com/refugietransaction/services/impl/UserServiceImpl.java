@@ -3,8 +3,10 @@ package com.refugietransaction.services.impl;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import com.refugietransaction.dto.CampDto;
 import com.refugietransaction.dto.ChangerUserPasswordDto;
 import com.refugietransaction.dto.UserAssignmentDto;
 import com.refugietransaction.model.TypeUser;
@@ -42,52 +44,42 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserDto save(UserDto userDto, UserAssignmentDto userAssignmentDto) {
+	public UserDto save(UserDto dto) {
 
-		List<String> errors = UserValidator.validate(userDto);
+		List<String> errors = UserValidator.validate(dto);
 		
 		if (!errors.isEmpty()) {
-			log.error("Utilisateur is not valid {}", userDto);
+			log.error("Utilisateur is not valid {}", dto);
 			throw new InvalidEntityException("L'utilisateur n'est pas valide", ErrorCodes.UTILISATEUR_NOT_VALID, errors);
 		}
-		
-		if(TypeUser.AGENT.equals(userDto.getTypeUser())) {
-			List<String> assignmentErrors = UserAssignmentValidator.validate(userAssignmentDto);
-			
-			if(!assignmentErrors.isEmpty()) {
-				log.error("L'assignation d'utilisateur n'est pas valide {}", userAssignmentDto);
-				throw new InvalidEntityException("L'assignation d'utilisateur n'est pas valide", ErrorCodes.UTILISATEUR_NOT_VALID, assignmentErrors);
-			}
-		}
 
-		if(userAlreadyExists(userDto.getEmail())) {
+		if(userAlreadyExists(dto.getEmail())) {
 			throw new InvalidEntityException("Un autre utilisateur avec le meme email existe deja", ErrorCodes.UTILISATEUR_ALREADY_EXISTS,
 					Collections.singletonList("Un autre utilisateur avec le meme email existe deja dans la BDD"));
 		}
 		
-		//variable qui stocke le user enregistré
-		User savedUser = userRepository.save(UserDto.toEntity(userDto));
+		dto.setPassword(String.valueOf(randomNumber()));
 		
-		if(TypeUser.AGENT.equals(userDto.getTypeUser())){
-			userAssignmentDto.setUser(savedUser);
-			saveUserAssignment(userAssignmentDto);
+		User savedUser = userRepository.save(UserDto.toEntity(dto));
+		
+		if(dto.getTypeUser().equals(TypeUser.AGENT)) {
+			UserAssignment userAssignment = new UserAssignment();
+			userAssignment.setCamp(CampDto.toEntity(dto.getUserAssignment().getCamp()));
+			userAssignment.setUser(savedUser);
+			userAssignmentRepository.save(userAssignment);
 		}
 
 		return UserDto.fromEntity(savedUser);
 	}
 
-	private void saveUserAssignment(UserAssignmentDto userAssignmentDto) {
-		UserAssignment userAssignment = new UserAssignment();
-		userAssignment.setUser(userAssignmentDto.getUser());
-		userAssignment.setCamp(userAssignmentDto.getCamp());
-		
-		userAssignmentRepository.save(userAssignment);
-		
-	}
-
 	private boolean userAlreadyExists(String email) {
 		Optional<User> user = userRepository.findUserByEmail(email);
 		return user.isPresent();
+	}
+	
+	private Long randomNumber() {
+		ThreadLocalRandom random = ThreadLocalRandom.current();
+		return random.nextLong(100000, 1000000);
 	}
 
 	@Override

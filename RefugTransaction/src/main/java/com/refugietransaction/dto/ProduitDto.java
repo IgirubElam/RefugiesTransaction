@@ -15,8 +15,6 @@ public class ProduitDto {
 	
 	private Long id;
 	private String nomProduit;
-	private Instant creationDate;
-	private Instant lastModifiedDate;
 	
 	@JsonIgnore List<MouvementStockDto> mouvementStocks;
 	
@@ -29,8 +27,6 @@ public class ProduitDto {
 		return ProduitDto.builder()
 				.id(produit.getId())
 				.nomProduit(produit.getNomProduit())
-				.creationDate(produit.getCreationDate())
-				.lastModifiedDate(produit.getLastModifiedDate())
 				.build();
 	}
 	
@@ -43,8 +39,6 @@ public class ProduitDto {
 		Produit produit = new Produit();
 		produit.setId(produitDto.getId());
 		produit.setNomProduit(produitDto.getNomProduit());
-		produit.setCreationDate(produitDto.getCreationDate());
-		produit.setLastModifiedDate(produitDto.getLastModifiedDate());
 		
 		return produit;
 		
